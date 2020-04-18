@@ -6,11 +6,20 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "dom-to-image": "^2.6.0",
+    "file-saver": "^2.0.2",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-draggable": "^4.3.1",
+    "react-scripts": "3.4.1",
+    "react-string-replace": "^0.4.4",
+    "save-svg-as-png": "^1.4.17",
+    "styled-components": "^5.1.0",
+    "uuid": "^7.0.3"
   },
   "scripts": {
+    "flow": "flow",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -30,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "flow-bin": "^0.122.0"
   }
 }
