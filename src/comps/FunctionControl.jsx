@@ -1,4 +1,3 @@
-//!NOT A REUSABLE CONTROL STRUCTURE
 import React, { useContext } from "react";
 import { StateContext } from "../App";
 import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
@@ -8,21 +7,22 @@ export default function TextAlignmentControl({
   controlData,
   handleSwitch,
   handleChange,
+  compName,
 }) {
   const state = useContext(StateContext);
   return (
     <>
       {controlData && (
-        <div className="controls__button-group--function-control">
+        <div className={`controls__${compName}`}>
           {headline && <h5>{headline}</h5>}
           <ToggleButtonGroup
             type="radio"
-            name="buttons-group--function-control"
+            name={`buttons-group--${compName}`}
             defaultValue={state.function}>
             {controlData.map((item, index) => (
               <ToggleButton
                 size="lg"
-                onChange={handleChange("function")}
+                onChange={handleChange(item.id)}
                 value={item.value}
                 key={item.buttonKey}
                 name={item.value}>

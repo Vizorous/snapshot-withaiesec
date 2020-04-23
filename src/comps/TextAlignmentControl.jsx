@@ -14,6 +14,7 @@ export default function TextAlignmentControl({
   controlData,
   handleSwitch,
   handleChange,
+  compName,
 }) {
   const state = useContext(StateContext);
   return (
@@ -32,7 +33,7 @@ export default function TextAlignmentControl({
               defaultValue={state.textAlign}>
               {controlData.map((item, index) => (
                 <ToggleButton
-                  onChange={handleChange("textAlign")}
+                  onChange={handleChange(item.id)}
                   value={item.value}
                   key={item.buttonKey}
                   name={item.value}>

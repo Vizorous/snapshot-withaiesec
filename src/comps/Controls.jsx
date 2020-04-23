@@ -25,12 +25,13 @@ function Controls({
     <Form className="controls" onSubmit={handleGenerate(refNode)}>
       {CONTROL_INFO &&
         //This Can Dynamically Render The Control Components, DO NOT TOUCH THIS
-        CONTROL_INFO.map((comp, index) => (
+        CONTROL_INFO.map((item, index) => (
           <React.Fragment key={`${index}-fragment`}>
-            {React.createElement(ControlList[comp.compName], {
-              key: comp.compName,
-              headline: comp.headline,
-              controlData: comp.controlData,
+            {React.createElement(ControlList[item.compName], {
+              key: item.compName,
+              compName: item.compName,
+              headline: item.headline,
+              controlData: item.controlData,
               handleChange: handleChange,
               handleSwitch: handleSwitch,
             })}

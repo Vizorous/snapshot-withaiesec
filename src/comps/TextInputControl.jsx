@@ -7,48 +7,36 @@ export default function TextInputControl({
   controlData,
   handleChange,
   handleSwitch,
+  key,
 }) {
+  console.log(key);
+
   return (
     <StateContext.Consumer>
       {(state) => (
         <>
           {controlData && (
-            <div className="controls__text">
+            <div className={`controls__${key}`}>
               {headline && <h5>{headline}</h5>}
               {controlData &&
-                controlData.map((val) => (
-                  <Form.Group key={val.groupKey} controlId={val.id}>
-                    <Form.Label key={val.labelKey}>{val.label}</Form.Label>
+                controlData.map((item) => (
+                  <Form.Group key={item.groupKey} controlId={item.id}>
+                    <Form.Label key={item.labelKey}>{item.label}</Form.Label>
                     <Form.Control
-                      type={val.type || undefined}
-                      placeholder={val.placeholder}
-                      as={val.as || undefined}
-                      key={val.controlKey}
-                      value={state[val.id]}
-                      onChange={handleChange(val.id)}
+                      type={item.type || undefined}
+                      placeholder={item.placeholder}
+                      as={item.as || undefined}
+                      key={item.controlKey}
+                      value={state[item.id]}
+                      onChange={handleChange(item.id)}
                     />
-                    {val.desc && (
-                      <Form.Text className="text-muted" key={val.desc.key}>
-                        {val.desc.text}
+                    {item.desc && (
+                      <Form.Text className="text-muted" key={item.desc.key}>
+                        {item.desc.text}
                       </Form.Text>
                     )}
                   </Form.Group>
                 ))}
-              <Form.Group controlId={"controls__toggle"}></Form.Group>
-              <Form.Group controlId={"controls__toggle"} className="mb-3">
-                {/* {controlData &&
-                  controlData.map((val) => {
-                    return ( */}
-                <Form.Check
-                  custom
-                  inline
-                  type="checkbox"
-                  value={state.check}
-                  label={"Testing"}
-                  onChange={handleSwitch("check")}></Form.Check>
-                {/* );
-                  })} */}
-              </Form.Group>
             </div>
           )}
         </>

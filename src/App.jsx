@@ -31,16 +31,19 @@ const CONTROL_INFO = [
     headline: "Select your Function",
     controlData: [
       {
+        id: "function",
         label: "Global Volunteer",
         value: "GV",
         buttonKey: v4(),
       },
       {
+        id: "function",
         label: "Global Entrepreneur",
         value: "GE",
         buttonKey: v4(),
       },
       {
+        id: "function",
         label: "Global Talent",
         value: "GT",
         buttonKey: v4(),
@@ -72,16 +75,19 @@ const CONTROL_INFO = [
     headline: "Text Align",
     controlData: [
       {
+        id: "textAlign",
         label: "Left",
         value: "left",
         buttonKey: v4(),
       },
       {
+        id: "textAlign",
         label: "Center",
         value: "center",
         buttonKey: v4(),
       },
       {
+        id: "textAlign",
         label: "Right",
         value: "right",
         buttonKey: v4(),
@@ -90,7 +96,7 @@ const CONTROL_INFO = [
   },
   {
     compName: "RangeControl",
-    headline: "Font Size Adjustment",
+    headline: "Range Controls",
     controlData: [
       {
         label: "Adjust the font size",

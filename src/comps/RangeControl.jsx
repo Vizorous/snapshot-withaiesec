@@ -7,17 +7,20 @@ export default function RangeControl({
   controlData,
   handleChange,
   handleSwitch,
+  compName,
 }) {
   const state = useContext(StateContext);
   return (
     <div>
       {controlData && (
-        <div className="controls__range">
+        <div className={`controls__${compName}`}>
           {headline && <h5>{headline}</h5>}
           {controlData.map((item, index) => {
             return (
               <Form.Group controlId={item.id} key={item.groupKey}>
-                <Form.Label key={item.labelKey}>{item.label}</Form.Label>
+                <Form.Label key={item.labelKey}>{`${item.label} :  ${
+                  state[item.id]
+                }`}</Form.Label>
                 <Form.Control
                   type="range"
                   custom
