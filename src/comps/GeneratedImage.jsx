@@ -106,16 +106,3 @@ export default class GeneratedImage extends PureComponent {
     );
   }
 }
-
-// const imageContainer = ({ height, width, sizeControl, children }) => {
-//   const style = {
-//     height: `${this.state.sizeControl * height}px`,
-//     width: `${this.state.sizeControl * width}px`,
-//   };
-//   return <div style={style}>{children}</div>;
-// };
-// const ImageContainer = styled.div`
-//   height: ${state.sizeControl * state.height}px;
-//   width: ${state.sizeControl * state.width}px;
-//   background-color: black;
-// `;

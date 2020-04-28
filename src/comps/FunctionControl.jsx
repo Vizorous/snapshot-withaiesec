@@ -33,8 +33,6 @@ export default function TextAlignmentControl({
                   value={item.value}
                   key={item.buttonKey}
                   name={item.value}>
-                  {/* {item.icon &&
-                    React.createElement(icons[item.icon], { key: item.iconKey })} */}
                   {item.label}
                 </ToggleButton>
               ))}

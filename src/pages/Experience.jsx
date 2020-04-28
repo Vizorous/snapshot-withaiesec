@@ -4,8 +4,10 @@ import { ControlContext } from "../App";
 import Controls from "../comps/Controls";
 import ExpImageWrapper from "../comps/ExpImageWrapper";
 import { Container } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 export default function Experience({ refNode }) {
   console.log(expControlList);
+ 
 
   return (
     <>

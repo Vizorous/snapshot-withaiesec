@@ -38,7 +38,6 @@ export default class App extends Component {
     this.handleGenerate = handleGenerate.bind(this);
     this.handleSwitch = handleSwitch.bind(this);
     this.setControlledPos = setControlledPos.bind(this);
-
     // *state
     this.state = initialState;
   }
@@ -91,44 +90,3 @@ export default class App extends Component {
     );
   }
 }
-
-// const CONTROL_INFO = [
-//   {
-//     compName: "TextInputControl",
-//     headline: "Text Inputs",
-//     controlData: [
-//       {
-//         label: "Country",
-//         placeholder: "Enter the Country",
-//         id: "country",
-//         as: "textarea",
-//         desc: {
-//           text: "Testing",
-//           key: v4(),
-//         },
-//         groupKey: v4(),
-//         labelKey: v4(),
-//         controlKey: v4(),
-//       },
-//       {
-//         label: "Salary",
-//         placeholder: "Enter the Salary",
-//         id: "salary",
-//         as: "",
-//         type: "text",
-//         groupKey: v4(),
-//         labelKey: v4(),
-//         controlKey: v4(),
-//       },
-//       {
-//         label: "Opp. Name",
-//         placeholder: "Enter the Opp. Name",
-//         id: "oppName",
-//         as: "textarea",
-//         groupKey: v4(),
-//         labelKey: v4(),
-//         controlKey: v4(),
-//       },
-//     ],
-//   },
-// ];

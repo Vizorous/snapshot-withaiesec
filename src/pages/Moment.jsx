@@ -9,14 +9,13 @@ import MomentImageWrapper from "../comps/MomentImageWrapper";
 export default function Moment({ refNode }) {
   return (
     <>
-      <h1>Coming Soon</h1>
-      {/* <Container>
+      <Container>
         <Controls
           controlInfo={momentControlInfo}
           refNode={refNode}
           ControlList={momentControlList}></Controls>
         <MomentImageWrapper refNode={refNode}></MomentImageWrapper>
-      </Container> */}
+      </Container>
     </>
   );
 }

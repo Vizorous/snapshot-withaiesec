@@ -62,7 +62,7 @@ export function handleGenerate(refNode) {
       },
       () => {
         dti.toJpeg(refNode.current, { quality: 0.9 }).then((blob) => {
-          window.saveAs(blob, `Testing.jpg`);
+          window.saveAs(blob, `${this.state.campaign}-${Date.now()}.jpg`);
           const sizeControl =
             window.innerWidth <= 600
               ? (window.innerWidth / 2000) * 0.9

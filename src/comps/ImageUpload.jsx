@@ -17,7 +17,7 @@ export default function ImageUpload({
       );
     },
   });
-  console.log("testing");
+  // console.log("testing");
 
   return (
     <div {...getRootProps({ className: "dropzone" })}>

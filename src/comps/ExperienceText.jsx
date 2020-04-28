@@ -11,14 +11,11 @@ const ExpText = styled.p`
   color: white;
   user-select: none;
   white-space: pre-line;
-  /* max-width: fit-content; */
-  /* position: absolute; */
-  /* pointer-events: none; */
+
   text-align: ${(props) => props.textAlign};
   line-height: ${(props) => props.lineHeight};
 `;
-/* min-width: max-content; */
-/* margin-bottom: ${state.sizeControl * 50}px; */
+
 const ColoredSpan = styled.span`
   color: ${(props) => props.accentColor};
 `;
