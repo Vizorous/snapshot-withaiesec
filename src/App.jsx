@@ -52,7 +52,7 @@ export default class App extends Component {
   }
 
   render() {
-    const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
+    // const dragHandlers = { onStart: this.onStart, onStop: this.onStop };
 
     return (
       <div className="App">
