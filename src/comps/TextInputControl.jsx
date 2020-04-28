@@ -7,16 +7,16 @@ export default function TextInputControl({
   controlData,
   handleChange,
   handleSwitch,
-  key,
+  compName,
 }) {
-  console.log(key);
+  // console.log(key);
 
   return (
     <StateContext.Consumer>
       {(state) => (
         <>
           {controlData && (
-            <div className={`controls__${key}`}>
+            <div className={`controls__${compName}`}>
               {headline && <h5>{headline}</h5>}
               {controlData &&
                 controlData.map((item) => (

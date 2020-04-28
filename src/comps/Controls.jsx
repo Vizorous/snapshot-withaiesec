@@ -1,31 +1,17 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
-import { StateContext, initialState } from "../App";
-import TextInputControl from "./TextInputControl";
+import React, { useContext } from "react";
+import { Form } from "react-bootstrap";
 import SubmitClearButtons from "./SubmitClearButtons";
-import TextAlignmentControl from "./TextAlignmentControl";
-import FunctionControl from "./FunctionControl";
-import RangeControl from "./RangeControl";
-const ControlList = {
-  TextInputControl: TextInputControl,
-  TextAlignmentControl: TextAlignmentControl,
-  FunctionControl: FunctionControl,
-  RangeControl: RangeControl,
-};
+import { ControlContext } from "../App";
+function Controls({ controlInfo, refNode, ControlList }) {
+  const { clearState, handleChange, handleSwitch, handleGenerate } = useContext(
+    ControlContext
+  );
 
-function Controls({
-  CONTROL_INFO,
-  clearState,
-  handleChange,
-  handleSwitch,
-  handleGenerate,
-  refNode,
-}) {
   return (
     <Form className="controls" onSubmit={handleGenerate(refNode)}>
-      {CONTROL_INFO &&
+      {controlInfo &&
         //This Can Dynamically Render The Control Components, DO NOT TOUCH THIS
-        CONTROL_INFO.map((item, index) => (
+        controlInfo.map((item, index) => (
           <React.Fragment key={`${index}-fragment`}>
             {React.createElement(ControlList[item.compName], {
               key: item.compName,
@@ -38,7 +24,7 @@ function Controls({
             <hr key={`${index}-hr`}></hr>
           </React.Fragment>
         ))}
-      {SubmitClearButtons(clearState, initialState)}
+      {SubmitClearButtons(clearState)}
       <hr></hr>
     </Form>
   );

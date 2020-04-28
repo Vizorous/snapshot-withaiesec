@@ -3,6 +3,7 @@ import RSR from "react-string-replace";
 import styled from "styled-components";
 import _ from "lodash";
 const ExpText = styled.p`
+  pointer-events: all;
   display: inline-block;
   font-family: Lato;
   font-weight: 700;
