@@ -10,10 +10,10 @@ export default function Moment({ refNode }) {
   return (
     <>
       <Container>
-        <Controls
+        {/* <Controls
           controlInfo={momentControlInfo}
           refNode={refNode}
-          ControlList={momentControlList}></Controls>
+          ControlList={momentControlList}></Controls> */}
         <MomentImageWrapper refNode={refNode}></MomentImageWrapper>
       </Container>
     </>

@@ -43,11 +43,13 @@ export default class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.function !== prevState.function) {
+    if (this.state.product !== prevState.product) {
       this.setState({
-        accentColor: colors[this.state.function],
-        tagImage: tagImages[this.state.function],
+        accentColor: colors[this.state.product],
+        tagImage: tagImages[this.state.product],
       });
+    }
+    if (this.state.lock !== prevState.lock) {
     }
   }
 

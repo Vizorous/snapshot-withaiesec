@@ -20,7 +20,7 @@ export default function TextInputControl({
               {headline && <h5>{headline}</h5>}
               {controlData &&
                 controlData.map((item) => (
-                  <Form.Group key={item.groupKey} controlId={item.id}>
+                  <Form.Group controlId={item.id}>
                     <Form.Label key={item.labelKey}>{item.label}</Form.Label>
                     <Form.Control
                       type={item.type || undefined}

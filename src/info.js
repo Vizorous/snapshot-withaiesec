@@ -4,14 +4,187 @@ import TextInputControl from "./comps/TextInputControl";
 import TextAlignmentControl from "./comps/TextAlignmentControl";
 import FunctionControl from "./comps/FunctionControl";
 import RangeControl from "./comps/RangeControl";
-import ImageUpload from "./comps/ImageUpload";
-export const expControlList = {
-  TextInputControl: TextInputControl,
-  TextAlignmentControl: TextAlignmentControl,
-  FunctionControl: FunctionControl,
-  ImageUpload: ImageUpload,
-  RangeControl: RangeControl,
+import ImageUpload from "./comps/ControlAtoms/ImageUpload";
+export const ExpLockInfo = {
+  compType: "ButtonToggle",
+  stateKey: "lock",
+  label: "Locking Controls",
+  defaultValue: "none",
+  buttonData: [
+    {
+      label: "None",
+      value: "none",
+    },
+    {
+      label: "Image Locked",
+      value: "imageLock",
+    },
+    {
+      label: "Text Locked",
+      value: "textLock",
+    },
+    {
+      label: "All Locked",
+      value: "allLock",
+    },
+  ],
 };
+export const TabbedExpControlInfo = [
+  {
+    key: "General",
+    name: "General Settings",
+    controlData: [
+      {
+        compType: "ButtonToggle",
+        stateKey: "product",
+        label: "Select the Product",
+        defaultValue: "GV",
+        buttonData: [
+          {
+            label: "Volunteer",
+            value: "GV",
+          },
+          {
+            label: "Entrepreneur",
+            value: "GE",
+          },
+          {
+            label: "Talent",
+            value: "GT",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    key: "Text",
+    name: "Text Settings",
+    controlData: [
+      {
+        compType: "TextInput",
+        label: "Enter the Text",
+        placeholder: "Enter the text here",
+        stateKey: "expText",
+        as: "textarea",
+        desc: {
+          text:
+            "Use asterisk(*) syntax to create Colored Text. ex. Normal Text *Colored Text* Normal Text",
+        },
+      },
+      {
+        compType: "ButtonToggle",
+        label: "Adjust the Text Alignment",
+        stateKey: "textAlign",
+        defaultValue: "left",
+        buttonData: [
+          {
+            label: "Left",
+            value: "left",
+          },
+          {
+            label: "Center",
+            value: "center",
+          },
+          {
+            label: "Right",
+            value: "right",
+          },
+        ],
+      },
+      {
+        compType: "RangeInput",
+        label: "Adjust the Font Size",
+        stateKey: "fontSize",
+        min: 40,
+        max: 200,
+      },
+      {
+        compType: "RangeInput",
+        label: "Adjust the Line Height",
+        stateKey: "lineHeight",
+        min: 1,
+        max: 2,
+        step: "0.1",
+      },
+    ],
+  },
+  {
+    key: "Image",
+    name: "Image Settings",
+    controlData: [
+      {
+        compType: "ImageUpload",
+        stateKey: "image",
+        label: "Upload the Image",
+      },
+      {
+        compType: "RangeInput",
+        stateKey: "overlayOpacity",
+        label: "Black Overlay Opacity",
+        min: 0,
+        max: 1,
+        step: "0.01",
+      },
+    ],
+  },
+
+  // {
+  //   compName: "TextAlignmentControl",
+  //   headline: "Text Align",
+  //   controlData: [
+  //     {
+  //       id: "textAlign",
+  //       label: "Left",
+  //       value: "left",
+  //       buttonKey: v4(),
+  //     },
+  //     {
+  //       id: "textAlign",
+  //       label: "Center",
+  //       value: "center",
+  //       buttonKey: v4(),
+  //     },
+  //     {
+  //       id: "textAlign",
+  //       label: "Right",
+  //       value: "right",
+  //       buttonKey: v4(),
+  //     },
+  //   ],
+  // },
+  // {
+  //   compName: "ImageUpload",
+  //   headline: "Upload the Image",
+  //   controlData: null,
+  // },
+  // {
+  //   compName: "RangeControl",
+  //   headline: "Range Controls",
+  //   controlData: [
+  //     {
+  //       label: "Adjust the font size",
+  //       id: "fontSize",
+  //       min: 40,
+  //       max: 200,
+
+  //       groupKey: v4(),
+  //       labelKey: v4(),
+  //       controlKey: v4(),
+  //     },
+  //     {
+  //       label: "Adjust the line height",
+  //       id: "lineHeight",
+  //       min: 1,
+  //       max: 2,
+  //       step: "0.1",
+  //       groupKey: v4(),
+  //       labelKey: v4(),
+  //       controlKey: v4(),
+  //     },
+  //   ],
+  // },
+];
 
 export const expControlInfo = [
   {
