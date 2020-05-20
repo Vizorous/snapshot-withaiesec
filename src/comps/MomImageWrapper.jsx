@@ -13,7 +13,8 @@ const DraggableContainer = styled.div`
   width: ${(props) => props.sizeControl * 2000}px;
 `;
 const WhiteBoxContainer = styled.div`
-  pointer-events: ${(props) => (props.enableDraw ? `all` : `none`)};
+  position: absolute;
+  pointer-events: ${(props) => (props.enableEraser ? `all` : `none`)};
 `;
 export default function MomImageWrapper({ refNode }) {
   const state = useContext(StateContext);
@@ -24,7 +25,8 @@ export default function MomImageWrapper({ refNode }) {
   const momentText = useRef(null);
   const { handleDrag } = useContext(ControlContext);
   const [textWidth, setTextWidth] = useState(null);
-
+  const [enableEraser, setEnableEraser] = useState(false);
+  const [enableZoom, setEnableZoom] = useState(false);
   const [roundedRectDrawable, setRoundedRectDrawable] = useState({
     top: state.controlledPosition.y,
     left: state.controlledPosition.x,
@@ -66,7 +68,7 @@ export default function MomImageWrapper({ refNode }) {
     catenaryColor: "#0a0302",
     gridColor: "rgba(150,150,150,0.17)",
     // immediateLoading: true,
-    hideInterface: !state.enableDraw,
+    hideInterface: !enableEraser,
     // loadTimeOffset: 0,
     ...roundedRectDrawable,
   };
@@ -93,7 +95,20 @@ export default function MomImageWrapper({ refNode }) {
   useEffect(() => {
     setDrawableSizeControl(state.sizeControl);
   }, []);
+  useEffect(() => {
+    console.log(state.whiteBoxControlMode);
 
+    if (state.whiteBoxControlMode === "eraser") {
+      setEnableEraser(true);
+      setEnableZoom(false);
+    } else if (state.whiteBoxControlMode === "zoom") {
+      setEnableEraser(!true);
+      setEnableZoom(!false);
+    } else {
+      setEnableEraser(false);
+      setEnableZoom(false);
+    }
+  }, [state.whiteBoxControlMode]);
   useEffect(() => {
     if (state.sizeControl === 1) {
       drawableCanvas &&
@@ -127,13 +142,12 @@ export default function MomImageWrapper({ refNode }) {
       sizeControl={state.sizeControl}
       tagImage={state.tagImage}
       imageLock={state.imageLock}>
-      <WhiteBoxContainer enableDraw={state.enableDraw}>
+      <WhiteBoxContainer enableEraser={enableEraser}>
         {!enableRender ? (
           <CanvasDraw
             {...drawableCanvasProps}
             ref={drawableCanvas}
-            style={{ position: "absolute" }}
-            disabled={!state.enableDraw}></CanvasDraw>
+            style={{ position: "absolute" }}></CanvasDraw>
         ) : null}
         {enableRender ? (
           <CanvasDraw

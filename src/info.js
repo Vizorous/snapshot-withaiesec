@@ -232,14 +232,22 @@ export const momControlInfo = [
         },
       },
       {
-        compType: "CheckToggle",
-        // label: "Enable Eraser Mode",
-        toggleData: [
+        compType: "ButtonToggle",
+        label: "Enable Control Modes",
+        stateKey: "whiteBoxControlMode",
+        defaultValue: "none",
+        buttonData: [
           {
-            type: "switch",
-            inline: true,
-            label: "Enable Eraser Mode",
-            stateKey: "enableDraw",
+            label: "None",
+            value: "none",
+          },
+          {
+            label: "Eraser Mode",
+            value: "eraser",
+          },
+          {
+            label: "Zoom Pan Mode",
+            value: "zoom",
           },
         ],
       },
