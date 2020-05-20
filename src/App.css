@@ -25,3 +25,6 @@
   width: 100% !important;
   height: 100% !important;
 }
+.nav-link:focus {
+  outline: none;
+}

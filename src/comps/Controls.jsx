@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import loadable from "@loadable/component";
 import styled from "styled-components";
 import LockToggle from "./ControlAtoms/LockToggle";
+import CheckToggle from "./ControlAtoms/CheckToggle";
 
 const ControlAtom = loadable((props) =>
   import(`./ControlAtoms/${props.compType}`)
@@ -53,7 +54,7 @@ function Controls({ controlInfo, refNode, lockInfo }) {
             ))}
         </Tabs>
         <hr></hr>
-        <LockToggle {...lockInfo} handleChange={handleChange}></LockToggle>
+        <LockToggle {...lockInfo} handleSwitch={handleSwitch}></LockToggle>
         <hr></hr>
         {SubmitClearButtons(clearState)}
         <hr></hr>

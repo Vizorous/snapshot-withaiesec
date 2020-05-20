@@ -31,17 +31,7 @@ export default class GeneratedImage extends PureComponent {
     this.imageRef = React.createRef();
     this.state = {
       centerContent: false,
-      imageDisable: false,
     };
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.lock !== prevProps.lock) {
-      if (this.props.lock === "imageLock" || this.props.lock === "allLock") {
-        this.setState({ imageDisable: true });
-      } else {
-        this.setState({ imageDisable: false });
-      }
-    }
   }
 
   imageOnLoad = () => {
@@ -92,7 +82,7 @@ export default class GeneratedImage extends PureComponent {
               defaultPositionX={0}
               defaultPositionY={0}
               options={{
-                disabled: this.state.imageDisable,
+                disabled: this.props.imageLock,
                 limitToWrapper: true,
                 limitToBounds: true,
                 centerContent: this.state.centerContent,

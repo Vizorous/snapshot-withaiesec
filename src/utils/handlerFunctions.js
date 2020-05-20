@@ -24,6 +24,8 @@ export function handleChange(type) {
 }
 export function handleSwitch(type) {
   return (value) => {
+    console.log(value.currentTarget);
+
     const finalBool =
       value && value.currentTarget && value.currentTarget.checked;
     this.setState({ [type]: finalBool });

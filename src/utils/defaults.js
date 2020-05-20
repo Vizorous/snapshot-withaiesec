@@ -25,6 +25,8 @@ export const ImgInfo = {
 //*Experience Control List (shortened as exp)
 
 export const initialState = {
+  textLock: false,
+  imageLock: false,
   expText: "",
   sizeControl: ImgInfo.sizeControl,
   height: ImgInfo.height,

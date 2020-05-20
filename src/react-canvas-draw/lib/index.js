@@ -182,9 +182,7 @@ var _default =
           height: _this.props.canvasHeight,
         });
       };
-      _this.getImageData = function () {
-        return _this.ctx.drawing.getImageData(0, 0, width, height);
-      };
+
       _this.loadSaveData = function (saveData) {
         // console.log(saveData);
 

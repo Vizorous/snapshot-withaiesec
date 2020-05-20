@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
-import { TabbedExpControlInfo, expControlList, ExpLockInfo } from "../info";
+import React from "react";
+import { expLockInfo, expControlInfo } from "../info";
 import Controls from "../comps/Controls";
 import ExpImageWrapper from "../comps/ExpImageWrapper";
-import { Container } from "react-bootstrap";
 export default function Experience({ refNode }) {
   return (
     <>
       <Controls
-        controlInfo={TabbedExpControlInfo}
+        controlInfo={expControlInfo}
         refNode={refNode}
-        lockInfo={ExpLockInfo}></Controls>
+        lockInfo={expLockInfo}></Controls>
       <ExpImageWrapper refNode={refNode}></ExpImageWrapper>
     </>
   );

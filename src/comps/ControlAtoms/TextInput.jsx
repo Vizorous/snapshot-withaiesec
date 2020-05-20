@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { ControlContext, StateContext } from "../../App";
 import { Form } from "react-bootstrap";
 
 function TextInput(props) {
-  const { handleChange } = useContext(ControlContext);
   return (
     <Form.Group controlId={props.stateKey}>
       <Form.Label>{props.label}</Form.Label>

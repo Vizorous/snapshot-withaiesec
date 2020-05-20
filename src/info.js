@@ -1,35 +1,22 @@
-import { v4 } from "uuid";
-
-import TextInputControl from "./comps/TextInputControl";
-import TextAlignmentControl from "./comps/TextAlignmentControl";
-import FunctionControl from "./comps/FunctionControl";
-import RangeControl from "./comps/RangeControl";
-import ImageUpload from "./comps/ControlAtoms/ImageUpload";
-export const ExpLockInfo = {
-  compType: "ButtonToggle",
-  stateKey: "lock",
+export const expLockInfo = {
+  compType: "CheckToggle",
   label: "Locking Controls",
-  defaultValue: "none",
-  buttonData: [
+  toggleData: [
     {
-      label: "None",
-      value: "none",
+      type: "switch",
+      inline: true,
+      stateKey: "imageLock",
+      label: "Image Lock",
     },
     {
-      label: "Image Locked",
-      value: "imageLock",
-    },
-    {
-      label: "Text Locked",
-      value: "textLock",
-    },
-    {
-      label: "All Locked",
-      value: "allLock",
+      type: "switch",
+      inline: true,
+      label: "Text Lock",
+      stateKey: "textLock",
     },
   ],
 };
-export const TabbedExpControlInfo = [
+export const expControlInfo = [
   {
     key: "General",
     name: "General Settings",
@@ -128,166 +115,128 @@ export const TabbedExpControlInfo = [
       },
     ],
   },
-
-  // {
-  //   compName: "TextAlignmentControl",
-  //   headline: "Text Align",
-  //   controlData: [
-  //     {
-  //       id: "textAlign",
-  //       label: "Left",
-  //       value: "left",
-  //       buttonKey: v4(),
-  //     },
-  //     {
-  //       id: "textAlign",
-  //       label: "Center",
-  //       value: "center",
-  //       buttonKey: v4(),
-  //     },
-  //     {
-  //       id: "textAlign",
-  //       label: "Right",
-  //       value: "right",
-  //       buttonKey: v4(),
-  //     },
-  //   ],
-  // },
-  // {
-  //   compName: "ImageUpload",
-  //   headline: "Upload the Image",
-  //   controlData: null,
-  // },
-  // {
-  //   compName: "RangeControl",
-  //   headline: "Range Controls",
-  //   controlData: [
-  //     {
-  //       label: "Adjust the font size",
-  //       id: "fontSize",
-  //       min: 40,
-  //       max: 200,
-
-  //       groupKey: v4(),
-  //       labelKey: v4(),
-  //       controlKey: v4(),
-  //     },
-  //     {
-  //       label: "Adjust the line height",
-  //       id: "lineHeight",
-  //       min: 1,
-  //       max: 2,
-  //       step: "0.1",
-  //       groupKey: v4(),
-  //       labelKey: v4(),
-  //       controlKey: v4(),
-  //     },
-  //   ],
-  // },
 ];
-
-export const expControlInfo = [
+export const momControlInfo = [
   {
-    compName: "FunctionControl",
-    headline: "Select your Function",
+    key: "General",
+    name: "General Settings",
     controlData: [
       {
-        id: "function",
-        label: "Volunteer",
-        value: "GV",
-        buttonKey: v4(),
-      },
-      {
-        id: "function",
-        label: "Entrepreneur",
-        value: "GE",
-        buttonKey: v4(),
-      },
-      {
-        id: "function",
-        label: "Talent",
-        value: "GT",
-        buttonKey: v4(),
+        compType: "ButtonToggle",
+        stateKey: "product",
+        label: "Select the Product",
+        defaultValue: "GV",
+        buttonData: [
+          {
+            label: "Volunteer",
+            value: "GV",
+          },
+          {
+            label: "Entrepreneur",
+            value: "GE",
+          },
+          {
+            label: "Talent",
+            value: "GT",
+          },
+        ],
       },
     ],
   },
+
   {
-    compName: "TextInputControl",
-    headline: "Text Inputs",
+    key: "Text",
+    name: "Text Settings",
     controlData: [
       {
-        label: "Text",
-        placeholder: "Enter the text",
-        id: "expText",
+        compType: "TextInput",
+        label: "Enter the Text",
+        placeholder: "Enter the text here",
+        stateKey: "expText",
         as: "textarea",
         desc: {
           text:
-            "Use *Text* syntax to create Colored Text. ex. Normal Text *Colored Text* Normal Text",
-          key: v4(),
+            "Use asterisk(*) syntax to create Colored Text. ex. Normal Text *Colored Text* Normal Text",
         },
-        groupKey: v4(),
-        labelKey: v4(),
-        controlKey: v4(),
-      },
-    ],
-  },
-  {
-    compName: "TextAlignmentControl",
-    headline: "Text Align",
-    controlData: [
-      {
-        id: "textAlign",
-        label: "Left",
-        value: "left",
-        buttonKey: v4(),
       },
       {
-        id: "textAlign",
-        label: "Center",
-        value: "center",
-        buttonKey: v4(),
+        compType: "ButtonToggle",
+        label: "Adjust the Text Alignment",
+        stateKey: "textAlign",
+        defaultValue: "left",
+        buttonData: [
+          {
+            label: "Left",
+            value: "left",
+          },
+          {
+            label: "Center",
+            value: "center",
+          },
+          {
+            label: "Right",
+            value: "right",
+          },
+        ],
       },
       {
-        id: "textAlign",
-        label: "Right",
-        value: "right",
-        buttonKey: v4(),
-      },
-    ],
-  },
-  {
-    compName: "ImageUpload",
-    headline: "Upload the Image",
-    controlData: null,
-  },
-  {
-    compName: "RangeControl",
-    headline: "Range Controls",
-    controlData: [
-      {
-        label: "Adjust the font size",
-        id: "fontSize",
+        compType: "RangeInput",
+        label: "Adjust the Font Size",
+        stateKey: "fontSize",
         min: 40,
         max: 200,
-
-        groupKey: v4(),
-        labelKey: v4(),
-        controlKey: v4(),
       },
       {
-        label: "Adjust the line height",
-        id: "lineHeight",
+        compType: "RangeInput",
+        label: "Adjust the Line Height",
+        stateKey: "lineHeight",
         min: 1,
         max: 2,
         step: "0.1",
-        groupKey: v4(),
-        labelKey: v4(),
-        controlKey: v4(),
+      },
+    ],
+  },
+  {
+    key: "Image",
+    name: "Image Settings",
+    controlData: [
+      {
+        compType: "ImageUpload",
+        stateKey: "image",
+        label: "Upload the Image",
+      },
+      {
+        compType: "RangeInput",
+        stateKey: "overlayOpacity",
+        label: "Black Overlay Opacity",
+        min: 0,
+        max: 1,
+        step: "0.01",
       },
     ],
   },
 ];
-
-export const momentControlList = {};
-
-export const momentControlInfo = [];
+export const momLockInfo = {
+  compType: "ButtonToggle",
+  stateKey: "lock",
+  label: "Locking Controls",
+  defaultValue: "none",
+  buttonData: [
+    {
+      label: "None",
+      value: "none",
+    },
+    {
+      label: "Image Locked",
+      value: "imageLock",
+    },
+    {
+      label: "Text Locked",
+      value: "textLock",
+    },
+    {
+      label: "All Locked",
+      value: "allLock",
+    },
+  ],
+};

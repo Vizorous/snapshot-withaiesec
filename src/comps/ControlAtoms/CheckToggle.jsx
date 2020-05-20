@@ -4,17 +4,12 @@ import { Form, Container } from "react-bootstrap";
 import { StateContext } from "../../App";
 import { useContext } from "react";
 
-function LockToggle(props) {
+function CheckToggle(props) {
   const state = useContext(StateContext);
   return (
-    <Form.Group
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}>
+    <Form.Group>
       <Form.Label>{props.label}</Form.Label>
-      <div style={{ marginLeft: 16 }}>
+      <Container>
         {props.toggleData.map((item) => (
           <Form.Check
             custom
@@ -26,11 +21,11 @@ function LockToggle(props) {
             id={`${item.stateKey}-toggle`}
           />
         ))}
-      </div>
+      </Container>
     </Form.Group>
   );
 }
-LockToggle.propTypes = {
+CheckToggle.propTypes = {
   toggleData: PropTypes.arrayOf(
     PropTypes.shape({
       stateKey: PropTypes.string,
@@ -45,4 +40,4 @@ LockToggle.propTypes = {
   handleChange: PropTypes.func,
 };
 
-export default LockToggle;
+export default CheckToggle;

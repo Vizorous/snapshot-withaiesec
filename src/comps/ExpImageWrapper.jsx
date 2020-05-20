@@ -14,18 +14,10 @@ const DraggableContainer = styled.div`
 export default function ExpImageWrapper({ refNode }) {
   const state = useContext(StateContext);
   const { handleDrag } = useContext(ControlContext);
-  const [enableDrag, setEnableDrag] = useState(true);
-  const draggableData = {};
   const dragging = (params) => {
     console.log(params);
   };
-  useEffect(() => {
-    if (state.lock === "textLock" || state.lock === "allLock") {
-      setEnableDrag(false);
-    } else {
-      setEnableDrag(true);
-    }
-  }, [state.lock]);
+
   return (
     <GeneratedImage
       lock={state.lock}
@@ -33,17 +25,19 @@ export default function ExpImageWrapper({ refNode }) {
       overlayOpacity={state.overlayOpacity}
       refNode={refNode}
       sizeControl={state.sizeControl}
-      tagImage={state.tagImage}>
+      tagImage={state.tagImage}
+      imageLock={state.imageLock}>
       <DraggableContainer
         className="draggable-container"
         sizeControl={state.sizeControl}>
         <Draggable
           bounds="parent"
-          onStart={enableDrag ? () => true : () => false}
+          onStart={!state.textLock ? () => true : () => false}
           onStop={handleDrag}
           position={state.controlledPosition}>
           <div style={{ display: "inline-block", maxWidth: "fit-content" }}>
             <ExperienceText
+              enableDrag={!state.textLock}
               sizeControl={state.sizeControl}
               expText={state.expText}
               fontSize={state.fontSize}
