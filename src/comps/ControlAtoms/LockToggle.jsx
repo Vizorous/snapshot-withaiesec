@@ -19,6 +19,7 @@ function LockToggle(props) {
           <Form.Check
             custom
             checked={state[item.stateKey]}
+            defaultChecked={item.defaultChecked}
             label={item.label}
             inline={item.inline}
             type={item.type}
@@ -33,6 +34,7 @@ function LockToggle(props) {
 LockToggle.propTypes = {
   toggleData: PropTypes.arrayOf(
     PropTypes.shape({
+      defaultChecked: PropTypes.bool,
       stateKey: PropTypes.string,
       label: PropTypes.string,
       type: PropTypes.string,

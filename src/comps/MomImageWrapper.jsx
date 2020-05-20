@@ -50,7 +50,6 @@ export default function MomImageWrapper({ refNode }) {
     lineWidth: roundedRect.lineWidth * (1 / sizeControl),
   });
   const [drawableSizeControl, setDrawableSizeControl] = useState(0);
-  const [enableDraw, setEnableDraw] = useState(false);
   const [enableRender, setEnableRender] = useState(false);
   const [canvasData, setCanvasData] = useState(undefined);
   const drawableCanvasProps = {

@@ -25,6 +25,7 @@ export const ImgInfo = {
 //*Experience Control List (shortened as exp)
 
 export const initialState = {
+  enableDraw: false,
   textLock: false,
   imageLock: false,
   expText: "",
