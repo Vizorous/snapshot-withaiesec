@@ -196,59 +196,7 @@ export const momControlInfo = [
       },
     ],
   },
-  {
-    key: "Text",
-    name: "Text Settings",
-    controlData: [
-      {
-        compType: "TextInput",
-        label: "Enter the Text",
-        placeholder: "Enter the text here",
-        stateKey: "expText",
-        as: "textarea",
-        desc: {
-          text:
-            "Use asterisk(*) syntax to create Colored Text. ex. Normal Text *Colored Text* Normal Text",
-        },
-      },
-      {
-        compType: "ButtonToggle",
-        label: "Adjust the Text Alignment",
-        stateKey: "textAlign",
-        defaultValue: "left",
-        buttonData: [
-          {
-            label: "Left",
-            value: "left",
-          },
-          {
-            label: "Center",
-            value: "center",
-          },
-          {
-            label: "Right",
-            value: "right",
-          },
-        ],
-      },
-      {
-        compType: "RangeInput",
-        label: "Adjust the Font Size",
-        stateKey: "fontSize",
-        min: 40,
-        max: 200,
-      },
-      {
-        compType: "RangeInput",
-        label: "Adjust the Line Height",
-        stateKey: "lineHeight",
-        min: 1,
-        max: 2,
-        step: "0.1",
-      },
-    ],
-  },
-  ,
+
   {
     key: "Image",
     name: "Image Settings",

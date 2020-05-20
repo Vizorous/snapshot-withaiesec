@@ -10,6 +10,7 @@ function CheckToggle(props) {
     return props.toggleData.map((item) => (
       <Form.Check
         custom
+        key={item.stateKey}
         defaultChecked={item.defaultChecked}
         checked={state[item.stateKey]}
         label={item.label}
@@ -35,7 +36,6 @@ CheckToggle.propTypes = {
       stateKey: PropTypes.string,
       label: PropTypes.string,
       type: PropTypes.string,
-      key: PropTypes.string,
       inline: PropTypes.bool,
     })
   ),
