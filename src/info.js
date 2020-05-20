@@ -285,28 +285,14 @@ export const momControlInfo = [
       },
       {
         compType: "CheckToggle",
-  label: "Enable Eraser Mode",
-  toggleData: [
-    {
-      type: "switch",
-      inline: true,
-      stateKey: "imageLock",
-      label: "Image Lock",
-      stateKey: "enableDraw",
-    },
-        defaultValue: false,
-        buttonData: [
+        // label: "Enable Eraser Mode",
+        toggleData: [
           {
-            label: "Left",
-            value: "left",
-          },
-          {
-            label: "Center",
-            value: "center",
-          },
-          {
-            label: "Right",
-            value: "right",
+            type: "switch",
+            inline: true,
+            stateKey: "imageLock",
+            label: "Image Lock",
+            stateKey: "enableDraw",
           },
         ],
       },

@@ -126,7 +126,7 @@ export default function MomImageWrapper({ refNode }) {
       sizeControl={state.sizeControl}
       tagImage={state.tagImage}
       imageLock={state.imageLock}>
-      <WhiteBoxContainer enableDraw={enableDraw}>
+      <WhiteBoxContainer enableDraw={state.enableDraw}>
         {enableRender ? (
           <CanvasDraw
             {...drawableCanvasProps}

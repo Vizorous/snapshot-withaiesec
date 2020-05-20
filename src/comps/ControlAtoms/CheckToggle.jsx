@@ -6,23 +6,25 @@ import { useContext } from "react";
 
 function CheckToggle(props) {
   const state = useContext(StateContext);
+  const renderCheck = () => {
+    return props.toggleData.map((item) => (
+      <Form.Check
+        custom
+        defaultChecked={item.defaultChecked}
+        checked={state[item.stateKey]}
+        label={item.label}
+        inline={item.inline}
+        type={item.type}
+        onChange={props.handleSwitch(item.stateKey)}
+        id={`${item.stateKey}-toggle`}
+      />
+    ));
+  };
+
   return (
     <Form.Group>
-      <Form.Label>{props.label}</Form.Label>
-      <Container>
-        {props.toggleData.map((item) => (
-          <Form.Check
-            custom
-            defaultChecked={item.defaultChecked}
-            checked={state[item.stateKey]}
-            label={item.label}
-            inline={item.inline}
-            type={item.type}
-            onChange={props.handleSwitch(item.stateKey)}
-            id={`${item.stateKey}-toggle`}
-          />
-        ))}
-      </Container>
+      {props.label && <Form.Label>{props.label}</Form.Label>}
+      {props.label ? <Container>{renderCheck()}</Container> : renderCheck()}
     </Form.Group>
   );
 }
