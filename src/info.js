@@ -290,8 +290,7 @@ export const momControlInfo = [
           {
             type: "switch",
             inline: true,
-            stateKey: "imageLock",
-            label: "Image Lock",
+            label: "Enable Eraser Mode",
             stateKey: "enableDraw",
           },
         ],

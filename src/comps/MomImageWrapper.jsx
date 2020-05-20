@@ -66,7 +66,7 @@ export default function MomImageWrapper({ refNode }) {
     catenaryColor: "#0a0302",
     gridColor: "rgba(150,150,150,0.17)",
     // immediateLoading: true,
-    hideInterface: false,
+    hideInterface: !state.enableDraw,
     // loadTimeOffset: 0,
     ...roundedRectDrawable,
   };
@@ -76,6 +76,7 @@ export default function MomImageWrapper({ refNode }) {
     disabled: true,
     hideGrid: true,
     // imgSrc: img,
+    hideInterface: true,
     immediateLoading: true,
     loadTimeOffset: 0,
     ...roundedRectFinal,
@@ -99,20 +100,20 @@ export default function MomImageWrapper({ refNode }) {
         drawableCanvas.current &&
         setCanvasData(drawableCanvas.current.getSaveData());
       setRoundedRectFinal(resizeRect(roundedRectDrawable, drawableSizeControl));
-      setEnableRender(false);
-    } else {
       setEnableRender(true);
+    } else {
+      setEnableRender(false);
     }
   }, [state.sizeControl]);
   useEffect(() => {
-    if (enableRender) {
+    if (!enableRender) {
       canvasData &&
         drawableCanvas &&
         drawableCanvas.current &&
         drawableCanvas.current.loadSaveData(canvasData);
     } else {
-      canvasData &&
-        finalCanvas &&
+      // canvasData &&
+      finalCanvas &&
         finalCanvas.current &&
         finalCanvas.current.loadSaveData(canvasData);
     }
@@ -127,17 +128,19 @@ export default function MomImageWrapper({ refNode }) {
       tagImage={state.tagImage}
       imageLock={state.imageLock}>
       <WhiteBoxContainer enableDraw={state.enableDraw}>
-        {enableRender ? (
+        {!enableRender ? (
           <CanvasDraw
             {...drawableCanvasProps}
             ref={drawableCanvas}
-            style={{ position: "absolute" }}></CanvasDraw>
-        ) : (
+            style={{ position: "absolute" }}
+            disabled={!state.enableDraw}></CanvasDraw>
+        ) : null}
+        {enableRender ? (
           <CanvasDraw
             {...finalCanvasProps}
             ref={finalCanvas}
             style={{ position: "absolute" }}></CanvasDraw>
-        )}
+        ) : null}
       </WhiteBoxContainer>
 
       <DraggableContainer
