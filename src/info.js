@@ -217,26 +217,20 @@ export const momControlInfo = [
   },
 ];
 export const momLockInfo = {
-  compType: "ButtonToggle",
-  stateKey: "lock",
+  compType: "CheckToggle",
   label: "Locking Controls",
-  defaultValue: "none",
-  buttonData: [
+  toggleData: [
     {
-      label: "None",
-      value: "none",
+      type: "switch",
+      inline: true,
+      stateKey: "imageLock",
+      label: "Image Lock",
     },
     {
-      label: "Image Locked",
-      value: "imageLock",
-    },
-    {
-      label: "Text Locked",
-      value: "textLock",
-    },
-    {
-      label: "All Locked",
-      value: "allLock",
+      type: "switch",
+      inline: true,
+      label: "Text Lock",
+      stateKey: "textLock",
     },
   ],
 };

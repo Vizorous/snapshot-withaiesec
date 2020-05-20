@@ -12,6 +12,9 @@ const DraggableContainer = styled.div`
   height: ${(props) => props.sizeControl * 2000}px;
   width: ${(props) => props.sizeControl * 2000}px;
 `;
+const WhiteBoxContainer = styled.div`
+  pointer-events: ${(props) => (props.enableDraw ? `all` : `none`)};
+`;
 export default function MomImageWrapper({ refNode }) {
   const state = useContext(StateContext);
   // console.log(state);u
@@ -20,7 +23,6 @@ export default function MomImageWrapper({ refNode }) {
   const finalCanvas = useRef(null);
   const momentText = useRef(null);
   const { handleDrag } = useContext(ControlContext);
-  const [enableDrag, setEnableDrag] = useState(true);
   const [textWidth, setTextWidth] = useState(null);
 
   const [roundedRectDrawable, setRoundedRectDrawable] = useState({
@@ -48,7 +50,8 @@ export default function MomImageWrapper({ refNode }) {
     lineWidth: roundedRect.lineWidth * (1 / sizeControl),
   });
   const [drawableSizeControl, setDrawableSizeControl] = useState(0);
-  const [enableDraw, setEnableDraw] = useState(true);
+  const [enableDraw, setEnableDraw] = useState(false);
+  const [enableRender, setEnableRender] = useState(false);
   const [canvasData, setCanvasData] = useState(undefined);
   const drawableCanvasProps = {
     className: count,
@@ -90,40 +93,31 @@ export default function MomImageWrapper({ refNode }) {
   useEffect(() => {
     setDrawableSizeControl(state.sizeControl);
   }, []);
-  useEffect(() => {
-    if (state.lock === "textLock" || state.lock === "allLock") {
-      setEnableDrag(false);
-    } else {
-      setEnableDrag(true);
-    }
-  }, [state.lock]);
+
   useEffect(() => {
     if (state.sizeControl === 1) {
-      console.log("flip draw");
-
       drawableCanvas &&
         drawableCanvas.current &&
         setCanvasData(drawableCanvas.current.getSaveData());
       setRoundedRectFinal(resizeRect(roundedRectDrawable, drawableSizeControl));
-      setEnableDraw(false);
-      console.log(canvasData);
-      console.log(finalCanvas);
+      setEnableRender(false);
     } else {
-      setEnableDraw(true);
+      setEnableRender(true);
     }
   }, [state.sizeControl]);
   useEffect(() => {
-    if (enableDraw) {
+    if (enableRender) {
       canvasData &&
         drawableCanvas &&
         drawableCanvas.current &&
         drawableCanvas.current.loadSaveData(canvasData);
     } else {
-      finalCanvas &&
+      canvasData &&
+        finalCanvas &&
         finalCanvas.current &&
         finalCanvas.current.loadSaveData(canvasData);
     }
-  }, [enableDraw]);
+  }, [enableRender]);
   return (
     <GeneratedImage
       lock={state.lock}
@@ -131,29 +125,33 @@ export default function MomImageWrapper({ refNode }) {
       overlayOpacity={state.overlayOpacity}
       refNode={refNode}
       sizeControl={state.sizeControl}
-      tagImage={state.tagImage}>
-      {enableDraw ? (
-        <CanvasDraw
-          {...drawableCanvasProps}
-          ref={drawableCanvas}
-          style={{ position: "absolute" }}></CanvasDraw>
-      ) : null}
-      {!enableDraw ? (
-        <CanvasDraw
-          {...finalCanvasProps}
-          ref={finalCanvas}
-          style={{ position: "absolute" }}></CanvasDraw>
-      ) : null}
+      tagImage={state.tagImage}
+      imageLock={state.imageLock}>
+      <WhiteBoxContainer enableDraw={enableDraw}>
+        {enableRender ? (
+          <CanvasDraw
+            {...drawableCanvasProps}
+            ref={drawableCanvas}
+            style={{ position: "absolute" }}></CanvasDraw>
+        ) : (
+          <CanvasDraw
+            {...finalCanvasProps}
+            ref={finalCanvas}
+            style={{ position: "absolute" }}></CanvasDraw>
+        )}
+      </WhiteBoxContainer>
+
       <DraggableContainer
         className="draggable-container"
         sizeControl={state.sizeControl}>
         <Draggable
           bounds="parent"
-          onStart={enableDrag ? () => true : () => false}
+          onStart={!state.textLock ? () => true : () => false}
           onStop={handleDrag}
           position={state.controlledPosition}>
           <div style={{ display: "inline-block", maxWidth: "fit-content" }}>
             <ExperienceText
+              enableDrag={!state.textLock}
               sizeControl={state.sizeControl}
               expText={state.expText}
               fontSize={state.fontSize}
