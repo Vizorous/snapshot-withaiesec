@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ConstantImage from "./ConstantImage";
 // import CanvasDraw from "../utils/react-canvas-draw/lib/index";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import TransformImageWrapper from "./TransformImageWrapper";
 
 const ImageContainer = styled.div`
   margin: auto;
@@ -15,14 +16,6 @@ const TransformContainer = styled.div`
   width: ${(props) => props.sizeControl * 2000}px;
   position: absolute;
 `;
-const MainImage = styled.img.attrs((props) => ({
-  src: props.image,
-  ref: props.ref,
-  onLoad: props.onLoad,
-}))`
-  width: ${(props) => props.setImageWidth()};
-  height: ${(props) => props.setImageHeight()};
-`;
 
 export default class GeneratedImage extends PureComponent {
   constructor(props) {
@@ -31,7 +24,17 @@ export default class GeneratedImage extends PureComponent {
     this.imageRef = React.createRef();
     this.state = {
       centerContent: false,
+      setTransform: (params) => {
+        return;
+      },
+      positionX: 0,
+      positionY: 0,
     };
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.sizeControl !== prevProps.sizeControl) {
+      console.log(this.props.sizeControl);
+    }
   }
 
   imageOnLoad = () => {
@@ -79,22 +82,44 @@ export default class GeneratedImage extends PureComponent {
           <TransformContainer sizeControl={sizeControl}>
             <TransformWrapper
               defaultScale={1}
-              defaultPositionX={0}
-              defaultPositionY={0}
+              // defaultPositionX={0}
+              // defaultPositionY={0}
+              onZoomChange={(params) => {
+                this.setState({
+                  positionX: params.positionX,
+                  positionY: params.positionY,
+                });
+              }}
+              onPanning={(params) => {
+                this.setState({
+                  positionX: params.positionX,
+                  positionY: params.positionY,
+                });
+              }}
+              doubleClick={{ disabled: true }}
+              enablePanPadding={false}
+              positionX={this.state.positionX}
+              positionY={this.state.positionY}
               options={{
                 disabled: this.props.imageLock,
                 limitToWrapper: true,
                 limitToBounds: true,
                 centerContent: this.state.centerContent,
               }}>
-              <TransformComponent>
-                <MainImage
-                  image={image}
-                  ref={this.imageRef}
-                  onLoad={this.imageOnLoad}
-                  setImageHeight={this.setImageHeight}
-                  setImageWidth={this.setImageWidth}></MainImage>
-              </TransformComponent>
+              {({ positionX, positionY, setTransform }) => (
+                <TransformComponent>
+                  <TransformImageWrapper
+                    sizeControl={this.props.sizeControl}
+                    image={image}
+                    reference={this.imageRef}
+                    onLoad={this.imageOnLoad}
+                    setImageHeight={this.setImageHeight}
+                    setImageWidth={this.setImageWidth}
+                    positionX={positionX}
+                    positionY={positionY}
+                    setTransform={setTransform}></TransformImageWrapper>
+                </TransformComponent>
+              )}
             </TransformWrapper>
           </TransformContainer>
 

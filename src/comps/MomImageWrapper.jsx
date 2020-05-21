@@ -135,7 +135,6 @@ export default function MomImageWrapper({ refNode }) {
   }, [enableRender]);
   return (
     <GeneratedImage
-      lock={state.lock}
       image={state.image}
       overlayOpacity={state.overlayOpacity}
       refNode={refNode}

@@ -20,7 +20,6 @@ export default function ExpImageWrapper({ refNode }) {
 
   return (
     <GeneratedImage
-      lock={state.lock}
       image={state.image}
       overlayOpacity={state.overlayOpacity}
       refNode={refNode}

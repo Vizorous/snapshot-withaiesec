@@ -56,6 +56,10 @@ function Controls({ controlInfo, refNode, lockInfo }) {
         <hr></hr>
         <LockToggle {...lockInfo} handleSwitch={handleSwitch}></LockToggle>
         <hr></hr>
+        <ControlAtom
+          compType={"TextInput"}
+          stateKey={"sizeControl"}
+          handleChange={handleChange}></ControlAtom>
         {SubmitClearButtons(clearState)}
         <hr></hr>
       </Container>
