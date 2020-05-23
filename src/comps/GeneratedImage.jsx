@@ -24,17 +24,7 @@ export default class GeneratedImage extends PureComponent {
     this.imageRef = React.createRef();
     this.state = {
       centerContent: false,
-      setTransform: (params) => {
-        return;
-      },
-      positionX: 0,
-      positionY: 0,
     };
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.sizeControl !== prevProps.sizeControl) {
-      console.log(this.props.sizeControl);
-    }
   }
 
   imageOnLoad = () => {
@@ -82,31 +72,13 @@ export default class GeneratedImage extends PureComponent {
           <TransformContainer sizeControl={sizeControl}>
             <TransformWrapper
               defaultScale={1}
-              // defaultPositionX={0}
-              // defaultPositionY={0}
-              onZoomChange={(params) => {
-                this.setState({
-                  positionX: params.positionX,
-                  positionY: params.positionY,
-                });
-              }}
-              onPanning={(params) => {
-                this.setState({
-                  positionX: params.positionX,
-                  positionY: params.positionY,
-                });
-              }}
-              doubleClick={{ disabled: true }}
-              enablePanPadding={false}
-              positionX={this.state.positionX}
-              positionY={this.state.positionY}
               options={{
                 disabled: this.props.imageLock,
                 limitToWrapper: true,
                 limitToBounds: true,
                 centerContent: this.state.centerContent,
               }}>
-              {({ positionX, positionY, setTransform }) => (
+              {({ positionX, positionY, setTransform, scale }) => (
                 <TransformComponent>
                   <TransformImageWrapper
                     sizeControl={this.props.sizeControl}
@@ -117,6 +89,7 @@ export default class GeneratedImage extends PureComponent {
                     setImageWidth={this.setImageWidth}
                     positionX={positionX}
                     positionY={positionY}
+                    scale={scale}
                     setTransform={setTransform}></TransformImageWrapper>
                 </TransformComponent>
               )}

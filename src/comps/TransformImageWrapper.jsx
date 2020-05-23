@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { TransformComponent } from "react-zoom-pan-pinch";
+import usePrevious from "../utils/usePrevious";
 const MainImage = styled.img.attrs((props) => ({
   src: props.image,
   ref: props.ref,
@@ -17,11 +18,35 @@ export default function TransformImageWrapper({
   setImageWidth,
   positionX,
   positionY,
+  scale,
   setTransform,
   sizeControl,
 }) {
+  const previousSizeControl = usePrevious(sizeControl);
+  const prevPositionX = usePrevious(positionX);
+  const prevPositionY = usePrevious(positionY);
   useEffect(() => {
-    console.log(sizeControl);
+    console.log(previousSizeControl);
+
+    if (previousSizeControl !== 1) {
+      if (sizeControl === 1) {
+        setTransform(
+          positionX / previousSizeControl,
+          positionY / previousSizeControl,
+          scale,
+          0,
+          "linear"
+        );
+      }
+    } else {
+      setTransform(
+        positionX * sizeControl,
+        positionY * sizeControl,
+        scale,
+        0,
+        "linear"
+      );
+    }
   }, [sizeControl]);
 
   return (

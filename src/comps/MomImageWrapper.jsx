@@ -162,7 +162,7 @@ export default function MomImageWrapper({ refNode }) {
         <Draggable
           bounds="parent"
           onStart={!state.textLock ? () => true : () => false}
-          onStop={handleDrag}
+          onDrag={handleDrag}
           position={state.controlledPosition}>
           <div style={{ display: "inline-block", maxWidth: "fit-content" }}>
             <ExperienceText
