@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  useReducer,
+} from "react";
 import GeneratedImage from "./GeneratedImage";
 import styled from "styled-components";
 import Draggable from "react-draggable";
@@ -17,6 +23,15 @@ const WhiteBoxContainer = styled.div`
   pointer-events: ${(props) => (props.enableEraser ? `all` : `none`)};
 `;
 export default function MomImageWrapper({ refNode }) {
+  function reducer(state, action) {
+    let changedState = {};
+    Object.keys(action).map((item) => {
+      changedState[item] = action[item];
+    });
+    // console.log(changedState);
+
+    return { ...state, ...changedState };
+  }
   const state = useContext(StateContext);
   // console.log(state);u
   const [count, setCount] = useState(1);
@@ -35,6 +50,14 @@ export default function MomImageWrapper({ refNode }) {
     rounded: 30,
     lineWidth: 5,
   });
+  const [roundedRecTest, setRoundedRecTest] = useReducer(reducer, {
+    top: state.controlledPosition.y,
+    left: state.controlledPosition.x,
+    height: 300,
+    width: 400,
+    rounded: 30,
+    lineWidth: 1.5,
+  });
   const [roundedRectFinal, setRoundedRectFinal] = useState({
     top: 0,
     left: 0,
@@ -43,6 +66,14 @@ export default function MomImageWrapper({ refNode }) {
     rounded: 0,
     lineWidth: 0,
   });
+  // const [roundedRectDrawable, setRoundedRectDrawable] = useState({
+  //   top: state.controlledPosition.x,
+  //   left: state.controlledPosition.y,
+  //   height: 300,
+  //   width: 400,
+  //   rounded: 30,
+  //   lineWidth: 1.5,
+  // });
   const resizeRect = (roundedRect, sizeControl) => ({
     top: roundedRect.top * (1 / sizeControl),
     left: roundedRect.left * (1 / sizeControl),
@@ -92,9 +123,11 @@ export default function MomImageWrapper({ refNode }) {
       momentText.current &&
       console.log(momentText.current.clientWidth);
   }, [state.expText]);
+
   useEffect(() => {
     setDrawableSizeControl(state.sizeControl);
   }, []);
+
   useEffect(() => {
     console.log(state.whiteBoxControlMode);
 
@@ -133,6 +166,23 @@ export default function MomImageWrapper({ refNode }) {
         finalCanvas.current.loadSaveData(canvasData);
     }
   }, [enableRender]);
+  useEffect(() => {
+    setRoundedRectDrawable({
+      top: state.controlledPosition.x,
+      left: state.controlledPosition.y,
+      height: 0,
+      width: 0,
+      rounded: 0,
+      lineWidth: 0,
+    });
+  }, [state.controlledPosition]);
+  // useEffect(() => {
+  //   effect;
+  //   return () => {
+  //     cleanup;
+  //   };
+  // }, [input]);
+
   return (
     <GeneratedImage
       image={state.image}

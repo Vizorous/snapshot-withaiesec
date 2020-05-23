@@ -4,7 +4,7 @@ import dti from "dom-to-image";
 import { saveAs } from "file-saver";
 
 export function handleDrag(e, position) {
-  console.log(position);
+  // console.log(position);
 
   const { x, y } = position;
   this.setState({ controlledPosition: { x, y } });
