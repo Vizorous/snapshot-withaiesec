@@ -1,7 +1,7 @@
 import React from "react";
 import RSR from "react-string-replace";
 import styled from "styled-components";
-import _ from "lodash";
+// import _ from "lodash";
 const ExpText = styled.p`
   pointer-events: ${(props) => (props.enableDrag ? `all` : `none`)};
   display: inline-block;

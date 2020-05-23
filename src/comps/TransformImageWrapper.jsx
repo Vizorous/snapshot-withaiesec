@@ -23,8 +23,6 @@ export default function TransformImageWrapper({
   sizeControl,
 }) {
   const previousSizeControl = usePrevious(sizeControl);
-  const prevPositionX = usePrevious(positionX);
-  const prevPositionY = usePrevious(positionY);
   useEffect(() => {
     console.log(previousSizeControl);
 

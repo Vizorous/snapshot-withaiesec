@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import loadable from "@loadable/component";
 import styled from "styled-components";
 import LockToggle from "./ControlAtoms/LockToggle";
-import CheckToggle from "./ControlAtoms/CheckToggle";
+// import CheckToggle from "./ControlAtoms/CheckToggle";
 
 const ControlAtom = loadable((props) =>
   import(`./ControlAtoms/${props.compType}`)
