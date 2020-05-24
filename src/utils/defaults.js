@@ -25,10 +25,14 @@ export const ImgInfo = {
 //*Experience Control List (shortened as exp)
 
 export const initialState = {
+  addedTop: 0,
+  addedLeft: 0,
+  addedWidth: 0,
+  addedHeight: 0,
   whiteBoxControlMode: "none",
   textLock: false,
   imageLock: false,
-  expText: "",
+  expText: "sdfsff",
   sizeControl: ImgInfo.sizeControl,
   height: ImgInfo.height,
   width: ImgInfo.width,

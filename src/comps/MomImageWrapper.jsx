@@ -1,17 +1,11 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-  useRef,
-  useReducer,
-} from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import GeneratedImage from "./GeneratedImage";
 import styled from "styled-components";
 import Draggable from "react-draggable";
 import ExperienceText from "./ExperienceText";
 import CanvasDraw from "../react-canvas-draw/lib/index";
 
-import { StateContext, ControlContext } from "../App";
+import { StateContext } from "../App";
 const DraggableContainer = styled.div`
   pointer-events: none;
   position: absolute;
@@ -23,39 +17,31 @@ const WhiteBoxContainer = styled.div`
   pointer-events: ${(props) => (props.enableEraser ? `all` : `none`)};
 `;
 export default function MomImageWrapper({ refNode }) {
-  function reducer(state, action) {
-    let changedState = {};
-    Object.keys(action).map((item) => {
-      changedState[item] = action[item];
-    });
-    // console.log(changedState);
-
-    return { ...state, ...changedState };
-  }
   const state = useContext(StateContext);
   // console.log(state);u
   const [count, setCount] = useState(1);
   const drawableCanvas = useRef(null);
   const finalCanvas = useRef(null);
   const momentText = useRef(null);
-  const { handleDrag } = useContext(ControlContext);
+  function handleDrag(e, position) {
+    // console.log(position);
+
+    const { x, y } = position;
+    setControlledPosition({ x, y });
+  }
+  const [controlledPosition, setControlledPosition] = useState({
+    x: 300,
+    y: 400,
+  });
   const [textWidth, setTextWidth] = useState(null);
   const [enableEraser, setEnableEraser] = useState(false);
   const [enableZoom, setEnableZoom] = useState(false);
   const [roundedRectDrawable, setRoundedRectDrawable] = useState({
-    top: state.controlledPosition.y,
-    left: state.controlledPosition.x,
+    top: controlledPosition.x,
+    left: controlledPosition.y,
     height: 300,
     width: 400,
-    rounded: 30,
-    lineWidth: 5,
-  });
-  const [roundedRecTest, setRoundedRecTest] = useReducer(reducer, {
-    top: state.controlledPosition.y,
-    left: state.controlledPosition.x,
-    height: 300,
-    width: 400,
-    rounded: 30,
+    rounded: 10,
     lineWidth: 1.5,
   });
   const [roundedRectFinal, setRoundedRectFinal] = useState({
@@ -66,14 +52,6 @@ export default function MomImageWrapper({ refNode }) {
     rounded: 0,
     lineWidth: 0,
   });
-  // const [roundedRectDrawable, setRoundedRectDrawable] = useState({
-  //   top: state.controlledPosition.x,
-  //   left: state.controlledPosition.y,
-  //   height: 300,
-  //   width: 400,
-  //   rounded: 30,
-  //   lineWidth: 1.5,
-  // });
   const resizeRect = (roundedRect, sizeControl) => ({
     top: roundedRect.top * (1 / sizeControl),
     left: roundedRect.left * (1 / sizeControl),
@@ -101,7 +79,6 @@ export default function MomImageWrapper({ refNode }) {
     // immediateLoading: true,
     hideInterface: !enableEraser,
     // loadTimeOffset: 0,
-    ...roundedRectDrawable,
   };
   const finalCanvasProps = {
     canvasWidth: 2000,
@@ -118,11 +95,9 @@ export default function MomImageWrapper({ refNode }) {
   const dragging = (params) => {
     console.log(params);
   };
-  useEffect(() => {
-    momentText &&
-      momentText.current &&
-      console.log(momentText.current.clientWidth);
-  }, [state.expText]);
+  // useEffect(() => {
+
+  // }, [state.expText]);
 
   useEffect(() => {
     setDrawableSizeControl(state.sizeControl);
@@ -167,21 +142,19 @@ export default function MomImageWrapper({ refNode }) {
     }
   }, [enableRender]);
   useEffect(() => {
+    const textIncreaseWidth =
+      momentText && momentText.current && momentText.current.clientWidth;
+    const textIncreaseHeight =
+      momentText && momentText.current && momentText.current.clientHeight;
     setRoundedRectDrawable({
-      top: state.controlledPosition.x,
-      left: state.controlledPosition.y,
-      height: 0,
-      width: 0,
-      rounded: 0,
-      lineWidth: 0,
+      top: controlledPosition.x + state.addedTop - 30 * state.sizeControl,
+      left: controlledPosition.y + state.addedLeft - 30 * state.sizeControl,
+      width: textIncreaseWidth + state.addedWidth + 65 * state.sizeControl,
+      height: textIncreaseHeight + state.addedHeight + 65 * state.sizeControl,
+      rounded: 10,
+      lineWidth: 1.5,
     });
-  }, [state.controlledPosition]);
-  // useEffect(() => {
-  //   effect;
-  //   return () => {
-  //     cleanup;
-  //   };
-  // }, [input]);
+  }, [controlledPosition, state.expText]);
 
   return (
     <GeneratedImage
@@ -196,6 +169,7 @@ export default function MomImageWrapper({ refNode }) {
           <CanvasDraw
             {...drawableCanvasProps}
             ref={drawableCanvas}
+            {...roundedRectDrawable}
             style={{ position: "absolute" }}></CanvasDraw>
         ) : null}
         {enableRender ? (
@@ -213,7 +187,7 @@ export default function MomImageWrapper({ refNode }) {
           bounds="parent"
           onStart={!state.textLock ? () => true : () => false}
           onDrag={handleDrag}
-          position={state.controlledPosition}>
+          position={controlledPosition}>
           <div style={{ display: "inline-block", maxWidth: "fit-content" }}>
             <ExperienceText
               enableDrag={!state.textLock}

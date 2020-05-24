@@ -9,7 +9,6 @@ import { initialState, colors, tagImages } from "./utils/defaults";
 import {
   clearState,
   handleChange,
-  handleDrag,
   handleGenerate,
   handleSwitch,
   setControlledPos,
@@ -33,8 +32,6 @@ export default class App extends Component {
     // *handlers
     this.clearState = clearState.bind(this);
     this.handleChange = handleChange.bind(this);
-    this.handleDrag = handleDrag.bind(this);
-    this.handleDrag = handleDrag.bind(this);
     this.handleGenerate = handleGenerate.bind(this);
     this.handleSwitch = handleSwitch.bind(this);
     this.setControlledPos = setControlledPos.bind(this);
@@ -65,7 +62,6 @@ export default class App extends Component {
               handleSwitch: this.handleSwitch,
               handleChange: this.handleChange,
               handleGenerate: this.handleGenerate,
-              handleDrag: this.handleDrag,
             }}>
             <Switch>
               {/* <Route exact path="/" component={HomeComponent}></Route> */}
