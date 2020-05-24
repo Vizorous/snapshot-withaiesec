@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Form } from "react-bootstrap";
-
-function RangeInput(props) {
+import { AddedLengthsContext } from "../../pages/Moment";
+function MomentStatelessRangeInput(props) {
+  const {
+    [`set${props.stateKey}`]: setAddedLength,
+    [`${props.stateKey}`]: addedLength,
+  } = useContext(AddedLengthsContext);
+  // debugger;
+  // console.log(addedLengths[props.stateKey], props.stateKey);
   return (
     <Form.Group controlId={props.stateKey}>
-      <Form.Label>{`${props.label} : ${props.value}`}</Form.Label>
+      <Form.Label>{`${props.label} : ${addedLength}`}</Form.Label>
       <Form.Control
         type="range"
         custom
         min={props.min}
         max={props.max}
-        value={props.value}
+        value={addedLength.toString()}
         step={props.step !== undefined ? props.step : 1}
         onChange={(e) => {
-          props.handleChange(props.stateKey)(
-            Number(e.currentTarget.value)
+          setAddedLength(
+            Number(e.currentTarget.value) !== NaN
               ? Number(e.currentTarget.value)
               : e.currentTarget.value
           );
@@ -25,7 +31,7 @@ function RangeInput(props) {
   );
 }
 
-RangeInput.propTypes = {
+MomentStatelessRangeInput.propTypes = {
   stateKey: PropTypes.string,
   key: PropTypes.string,
   label: PropTypes.string,
@@ -37,4 +43,4 @@ RangeInput.propTypes = {
   handleSwitch: PropTypes.func,
 };
 
-export default RangeInput;
+export default MomentStatelessRangeInput;

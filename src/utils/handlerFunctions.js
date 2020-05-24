@@ -4,7 +4,9 @@ import dti from "dom-to-image";
 import { saveAs } from "file-saver";
 
 export function clearState() {
-  this.setState(initialState);
+  this.setState(initialState, () => {
+    this.setState({ clearState: true });
+  });
 }
 export function handleChange(type) {
   return (value) => {

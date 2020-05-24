@@ -25,6 +25,7 @@ export const ImgInfo = {
 //*Experience Control List (shortened as exp)
 
 export const initialState = {
+  clearState: false,
   addedTop: 0,
   addedLeft: 0,
   addedWidth: 0,

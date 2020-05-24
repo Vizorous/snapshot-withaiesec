@@ -575,8 +575,8 @@ var _default =
         // console.log(_this.props);
 
         ctx.roundRect(
-          _this.props.top,
           _this.props.left,
+          _this.props.top,
           this.props.width,
           _this.props.height,
           _this.props.rounded

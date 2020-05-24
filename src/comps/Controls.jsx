@@ -27,7 +27,6 @@ function Controls({ controlInfo, refNode, lockInfo }) {
   useEffect(() => {
     const pathname = history.location.pathname;
     const campaign = pathname.substring(1);
-    handleChange("campaign")(campaign);
   }, []);
 
   return (
