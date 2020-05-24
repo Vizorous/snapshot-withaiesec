@@ -15,7 +15,7 @@ function RangeInput(props) {
         step={props.step !== undefined ? props.step : 1}
         onChange={(e) => {
           props.handleChange(props.stateKey)(
-            Number(e.currentTarget.value)
+            Number(e.currentTarget.value) !== NaN
               ? Number(e.currentTarget.value)
               : e.currentTarget.value
           );

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Draggable from "react-draggable";
 import ExperienceText from "./ExperienceText";
 import CanvasDraw from "../react-canvas-draw/lib/index";
-import { AddedLengthsContext } from "../pages/Moment";
 
 import { StateContext, ControlContext } from "../App";
 const DraggableContainer = styled.div`
@@ -19,16 +18,6 @@ const WhiteBoxContainer = styled.div`
 `;
 
 export default function MomImageWrapper({ refNode }) {
-  const {
-    addedTop,
-    addedLeft,
-    addedWidth,
-    addedHeight,
-    setaddedTop,
-    setaddedLeft,
-    setaddedWidth,
-    setaddedHeight,
-  } = useContext(AddedLengthsContext);
   const state = useContext(StateContext);
   const defaultControlledPosition = {
     x: 300 * state.sizeControl,
@@ -54,13 +43,41 @@ export default function MomImageWrapper({ refNode }) {
     const { x, y } = position;
     setControlledPosition({ x, y });
   }
-  const resizeRect = (roundedRect, sizeControl) => ({
-    top: roundedRect.top * (1 / sizeControl),
-    left: roundedRect.left * (1 / sizeControl),
-    height: roundedRect.height * (1 / sizeControl),
-    width: roundedRect.width * (1 / sizeControl),
-    rounded: roundedRect.rounded * (1 / sizeControl),
-    lineWidth: roundedRect.lineWidth * (1 / sizeControl),
+  const setTextRectScaleFinal = (
+    controlledPosition,
+    roundedRect,
+    sizeControl
+  ) => ({
+    cP: {
+      x: controlledPosition.x * (1 / sizeControl),
+      y: controlledPosition.y * (1 / sizeControl),
+    },
+    rR: {
+      top: roundedRect.top * (1 / sizeControl),
+      left: roundedRect.left * (1 / sizeControl),
+      height: roundedRect.height * (1 / sizeControl),
+      width: roundedRect.width * (1 / sizeControl),
+      rounded: roundedRect.rounded * (1 / sizeControl),
+      lineWidth: roundedRect.lineWidth * (1 / sizeControl),
+    },
+  });
+  const setTextRectScaleDrawable = (
+    controlledPosition,
+    roundedRect,
+    sizeControl
+  ) => ({
+    cP: {
+      x: controlledPosition.x * sizeControl,
+      y: controlledPosition.y * sizeControl,
+    },
+    rR: {
+      top: roundedRect.top * sizeControl,
+      left: roundedRect.left * sizeControl,
+      height: roundedRect.height * sizeControl,
+      width: roundedRect.width * sizeControl,
+      rounded: roundedRect.rounded * sizeControl,
+      lineWidth: roundedRect.lineWidth * sizeControl,
+    },
   });
 
   const [controlledPosition, setControlledPosition] = useState(
@@ -90,7 +107,7 @@ export default function MomImageWrapper({ refNode }) {
     gridColor: "rgba(150,150,150,0.17)",
     // immediateLoading: true,
     hideInterface: !enableEraser,
-    // loadTimeOffset: 0,
+    // loadTimeOffset: 3,
   };
   const finalCanvasProps = {
     canvasWidth: 2000,
@@ -116,10 +133,6 @@ export default function MomImageWrapper({ refNode }) {
       setRoundedRectFinal(null);
       setEnableRender(false);
       setCanvasData(undefined);
-      setaddedTop(0);
-      setaddedLeft(0);
-      setaddedWidth(0);
-      setaddedHeight(0);
       handleChange("clearState")(false);
     }
     return () => {
@@ -130,10 +143,6 @@ export default function MomImageWrapper({ refNode }) {
       setRoundedRectFinal(null);
       setEnableRender(false);
       setCanvasData(undefined);
-      setaddedTop(0);
-      setaddedLeft(0);
-      setaddedWidth(0);
-      setaddedHeight(0);
       handleChange("clearState")(false);
     };
   }, [state.clearState]);
@@ -161,18 +170,35 @@ export default function MomImageWrapper({ refNode }) {
       drawableCanvas &&
         drawableCanvas.current &&
         setCanvasData(drawableCanvas.current.getSaveData());
-      setRoundedRectFinal(resizeRect(roundedRectDrawable, drawableSizeControl));
+      const { cP, rR } = setTextRectScaleFinal(
+        controlledPosition,
+        roundedRectDrawable,
+        drawableSizeControl
+      );
+      setRoundedRectFinal(rR);
+      setControlledPosition(cP);
       setEnableRender(true);
     } else {
+      if (drawableSizeControl !== 0) {
+        const { cP, rR } = setTextRectScaleDrawable(
+          controlledPosition,
+          roundedRectFinal,
+          state.sizeControl
+        );
+        setRoundedRectDrawable(rR);
+        setControlledPosition(cP);
+      }
       setEnableRender(false);
     }
   }, [state.sizeControl]);
   useEffect(() => {
     if (!enableRender) {
-      canvasData &&
-        drawableCanvas &&
-        drawableCanvas.current &&
-        drawableCanvas.current.loadSaveData(canvasData);
+      setTimeout(function () {
+        canvasData &&
+          drawableCanvas &&
+          drawableCanvas.current &&
+          drawableCanvas.current.loadSaveData(canvasData);
+      }, 500);
     } else {
       // canvasData &&
       finalCanvas &&
@@ -185,13 +211,16 @@ export default function MomImageWrapper({ refNode }) {
       momentText && momentText.current && momentText.current.clientWidth;
     const textIncreaseHeight =
       momentText && momentText.current && momentText.current.clientHeight;
+    // debugger;
     setRoundedRectDrawable({
-      top: controlledPosition.y - (addedTop + 30) * state.sizeControl,
-      left: controlledPosition.x - (addedLeft + 30) * state.sizeControl,
+      top: controlledPosition.y - (state.addedTop + 30) * state.sizeControl,
+      left: controlledPosition.x - (state.addedLeft + 30) * state.sizeControl,
       width:
-        textIncreaseWidth + (addedWidth + addedLeft + 65) * state.sizeControl,
+        textIncreaseWidth +
+        (state.addedWidth + state.addedLeft + 65) * state.sizeControl,
       height:
-        textIncreaseHeight + (addedHeight + addedTop + 65) * state.sizeControl,
+        textIncreaseHeight +
+        (state.addedHeight + state.addedTop + 65) * state.sizeControl,
       rounded: 10,
       lineWidth: 1.5,
     });
@@ -200,10 +229,10 @@ export default function MomImageWrapper({ refNode }) {
     state.expText,
     state.fontSize,
     state.lineHeight,
-    addedTop,
-    addedHeight,
-    addedLeft,
-    addedWidth,
+    state.addedTop,
+    state.addedHeight,
+    state.addedLeft,
+    state.addedWidth,
   ]);
 
   return (
