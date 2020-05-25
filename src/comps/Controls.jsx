@@ -1,39 +1,67 @@
 import React, { useContext, useEffect } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Tabs, Tab, Container } from "react-bootstrap";
 import SubmitClearButtons from "./SubmitClearButtons";
-import { ControlContext } from "../App";
+import { ControlContext, StateContext } from "../App";
 import { useHistory } from "react-router-dom";
-function Controls({ controlInfo, refNode, ControlList }) {
-  const { clearState, handleChange, handleSwitch, handleGenerate } = useContext(
+import loadable from "@loadable/component";
+import styled from "styled-components";
+import LockToggle from "./ControlAtoms/LockToggle";
+// import CheckToggle from "./ControlAtoms/CheckToggle";
+
+const ControlAtom = loadable((props) =>
+  import(`./ControlAtoms/${props.compType}`)
+);
+const SpacedContainer = styled(Container).attrs({
+  fluid: true,
+})`
+  margin-top: 16px;
+  margin-bottom: 16px;
+`;
+function Controls({ controlInfo, refNode, lockInfo }) {
+  const { clearState, handleGenerate, handleChange, handleSwitch } = useContext(
     ControlContext
   );
+  const state = useContext(StateContext);
   const history = useHistory();
 
   useEffect(() => {
     const pathname = history.location.pathname;
     const campaign = pathname.substring(1);
-    handleChange("campaign")(campaign);
   }, []);
 
   return (
     <Form className="controls" onSubmit={handleGenerate(refNode)}>
-      {controlInfo &&
-        //This Can Dynamically Render The Control Components, DO NOT TOUCH THIS
-        controlInfo.map((item, index) => (
-          <React.Fragment key={`${index}-fragment`}>
-            {React.createElement(ControlList[item.compName], {
-              key: item.compName,
-              compName: item.compName,
-              headline: item.headline,
-              controlData: item.controlData,
-              handleChange: handleChange,
-              handleSwitch: handleSwitch,
-            })}
-            <hr key={`${index}-hr`}></hr>
-          </React.Fragment>
-        ))}
-      {SubmitClearButtons(clearState)}
-      <hr></hr>
+      <Container>
+        <Tabs defaultActiveKey={(controlInfo && controlInfo[0].key) || "Text"}>
+          {controlInfo &&
+            controlInfo.map((item, index) => (
+              <Tab
+                eventKey={item.key}
+                title={item.name}
+                key={`${item.key}-tab`}>
+                <SpacedContainer key={`${item.key}-container`}>
+                  {item.controlData.map((innerItem, innerIndex) => (
+                    <ControlAtom
+                      {...innerItem}
+                      value={state[innerItem.stateKey]}
+                      key={`${innerItem.stateKey}-elem`}
+                      handleChange={handleChange}
+                      handleSwitch={handleSwitch}></ControlAtom>
+                  ))}
+                </SpacedContainer>
+              </Tab>
+            ))}
+        </Tabs>
+        <hr></hr>
+        <LockToggle {...lockInfo} handleSwitch={handleSwitch}></LockToggle>
+        <hr></hr>
+        <ControlAtom
+          compType={"TextInput"}
+          stateKey={"sizeControl"}
+          handleChange={handleChange}></ControlAtom>
+        {SubmitClearButtons(clearState)}
+        <hr></hr>
+      </Container>
     </Form>
   );
 }

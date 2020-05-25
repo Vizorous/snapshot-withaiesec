@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GeneratedImage from "./GeneratedImage";
 import styled from "styled-components";
 import Draggable from "react-draggable";
@@ -14,27 +14,29 @@ const DraggableContainer = styled.div`
 export default function ExpImageWrapper({ refNode }) {
   const state = useContext(StateContext);
   const { handleDrag } = useContext(ControlContext);
-
-  const draggableData = {};
   const dragging = (params) => {
     console.log(params);
   };
+
   return (
     <GeneratedImage
       image={state.image}
       overlayOpacity={state.overlayOpacity}
       refNode={refNode}
       sizeControl={state.sizeControl}
-      tagImage={state.tagImage}>
+      tagImage={state.tagImage}
+      imageLock={state.imageLock}>
       <DraggableContainer
         className="draggable-container"
         sizeControl={state.sizeControl}>
         <Draggable
           bounds="parent"
+          onStart={!state.textLock ? () => true : () => false}
           onStop={handleDrag}
           position={state.controlledPosition}>
           <div style={{ display: "inline-block", maxWidth: "fit-content" }}>
             <ExperienceText
+              enableDrag={!state.textLock}
               sizeControl={state.sizeControl}
               expText={state.expText}
               fontSize={state.fontSize}

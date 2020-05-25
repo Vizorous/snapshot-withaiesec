@@ -25,7 +25,15 @@ export const ImgInfo = {
 //*Experience Control List (shortened as exp)
 
 export const initialState = {
-  expText: "Text Here",
+  clearState: false,
+  addedTop: 0,
+  addedLeft: 0,
+  addedWidth: 0,
+  addedHeight: 0,
+  whiteBoxControlMode: "none",
+  textLock: false,
+  imageLock: false,
+  expText: "sdfsff",
   sizeControl: ImgInfo.sizeControl,
   height: ImgInfo.height,
   width: ImgInfo.width,
@@ -33,7 +41,7 @@ export const initialState = {
   overlayOpacity: 0.4,
   accentColor: colors.GV,
   textAlign: "left",
-  function: "GV",
+  product: "GV",
   tagImage: tagImages.GV,
   controlledPosition: {
     x: ImgInfo.sizeControl * 500,

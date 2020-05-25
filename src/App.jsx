@@ -9,9 +9,9 @@ import { initialState, colors, tagImages } from "./utils/defaults";
 import {
   clearState,
   handleChange,
-  handleDrag,
   handleGenerate,
   handleSwitch,
+  handleDrag,
   setControlledPos,
 } from "./utils/handlerFunctions";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -33,21 +33,22 @@ export default class App extends Component {
     // *handlers
     this.clearState = clearState.bind(this);
     this.handleChange = handleChange.bind(this);
-    this.handleDrag = handleDrag.bind(this);
-    this.handleDrag = handleDrag.bind(this);
     this.handleGenerate = handleGenerate.bind(this);
     this.handleSwitch = handleSwitch.bind(this);
+    this.handleDrag = handleDrag.bind(this);
     this.setControlledPos = setControlledPos.bind(this);
     // *state
     this.state = initialState;
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.function !== prevState.function) {
+    if (this.state.product !== prevState.product) {
       this.setState({
-        accentColor: colors[this.state.function],
-        tagImage: tagImages[this.state.function],
+        accentColor: colors[this.state.product],
+        tagImage: tagImages[this.state.product],
       });
+    }
+    if (this.state.lock !== prevState.lock) {
     }
   }
 

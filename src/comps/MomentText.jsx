@@ -1,12 +1,12 @@
 import React from "react";
 import RSR from "react-string-replace";
 import styled from "styled-components";
-// import _ from "lodash";
+import _ from "lodash";
 const ExpText = styled.p`
-  pointer-events: ${(props) => (props.enableDrag ? `all` : `none`)};
+  pointer-events: all;
   display: inline-block;
   font-family: Lato;
-  font-weight: 700;
+  font-weight: 900;
   font-size: ${(props) => props.sizeControl * props.fontSize}px;
   color: white;
   user-select: none;
@@ -16,8 +16,8 @@ const ExpText = styled.p`
   line-height: ${(props) => props.lineHeight};
 `;
 
-const ColoredSpan = styled.span`
-  color: ${(props) => props.accentColor};
+const BigSpan = styled.span`
+  font-size: ${(props) => props.sizeControl * (props.fontSize * 1.1)}px;
 `;
 export default function ExperienceText({
   expText,
@@ -27,13 +27,12 @@ export default function ExperienceText({
   fontSize,
   lineHeight,
   reference,
-  enableDrag,
 }) {
-  const Test = (expText, accentColor) => {
+  const Test = (expText, sizeControl, fontSize) => {
     return RSR(expText, /\*(.*?)\*/g, (match, i) => (
-      <ColoredSpan accentColor={accentColor} key={i}>
+      <BigSpan sizeControl={sizeControl} fontSize={fontSize} key={i}>
         {match}
-      </ColoredSpan>
+      </BigSpan>
     ));
   };
   return (
@@ -42,9 +41,8 @@ export default function ExperienceText({
       textAlign={textAlign}
       fontSize={fontSize}
       lineHeight={lineHeight}
-      ref={reference}
-      enableDrag={enableDrag}>
-      {expText && Test(expText, accentColor)}
+      ref={reference}>
+      {expText && Test(expText, sizeControl, fontSize)}
     </ExpText>
   );
 }
