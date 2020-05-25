@@ -577,8 +577,8 @@ var _default =
         ctx.roundRect(
           _this.props.left,
           _this.props.top,
-          this.props.width,
-          _this.props.height,
+          _this.props.right,
+          _this.props.bottom,
           _this.props.rounded
         );
         ctx.strokeStyle = "white";
@@ -726,8 +726,8 @@ var _default =
       if (
         prevProps.top !== this.props.top ||
         prevProps.left !== this.props.left ||
-        prevProps.height !== this.props.height ||
-        prevProps.width !== this.props.width ||
+        prevProps.bottom !== this.props.bottom ||
+        prevProps.right !== this.props.right ||
         prevProps.rounded !== this.props.rounded ||
         prevProps.lineWidth !== this.props.lineWidth
       ) {
@@ -820,8 +820,8 @@ var _default =
     hideInterface: _propTypes2.default.bool,
     top: _propTypes2.default.number,
     left: _propTypes2.default.number,
-    height: _propTypes2.default.number,
-    width: _propTypes2.default.number,
+    bottom: _propTypes2.default.number,
+    right: _propTypes2.default.number,
     rounded: _propTypes2.default.number,
     lineWidth: _propTypes2.default.number,
   }),
@@ -844,8 +844,8 @@ var _default =
     hideInterface: false,
     top: 100,
     left: 200,
-    height: 300,
-    width: 100,
+    bottom: 300,
+    right: 100,
     rounded: 20,
     lineWidth: 5,
   }),

@@ -3,6 +3,10 @@ import { initialState } from "./defaults";
 import dti from "dom-to-image";
 import { saveAs } from "file-saver";
 
+export function handleDrag(e, position) {
+  const { x, y } = position;
+  this.setState({ controlledPosition: { x, y } });
+}
 export function clearState() {
   this.setState(initialState, () => {
     this.setState({ clearState: true });
@@ -25,7 +29,11 @@ export function handleSwitch(type) {
     this.setState({ [type]: finalBool });
   };
 }
-
+export function onRenderScaling(states, sizeControl, before = true) {
+  if (before === true) {
+    this.setState({});
+  }
+}
 export function setControlledPos(
   controlledPosition,
   sizeControl,

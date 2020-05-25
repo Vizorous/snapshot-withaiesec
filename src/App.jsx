@@ -11,6 +11,7 @@ import {
   handleChange,
   handleGenerate,
   handleSwitch,
+  handleDrag,
   setControlledPos,
 } from "./utils/handlerFunctions";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -34,6 +35,7 @@ export default class App extends Component {
     this.handleChange = handleChange.bind(this);
     this.handleGenerate = handleGenerate.bind(this);
     this.handleSwitch = handleSwitch.bind(this);
+    this.handleDrag = handleDrag.bind(this);
     this.setControlledPos = setControlledPos.bind(this);
     // *state
     this.state = initialState;
@@ -62,6 +64,7 @@ export default class App extends Component {
               handleSwitch: this.handleSwitch,
               handleChange: this.handleChange,
               handleGenerate: this.handleGenerate,
+              handleDrag: this.handleDrag,
             }}>
             <Switch>
               {/* <Route exact path="/" component={HomeComponent}></Route> */}
