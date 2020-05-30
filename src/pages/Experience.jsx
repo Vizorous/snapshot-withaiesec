@@ -1,7 +1,7 @@
 import React from "react";
 import { expLockInfo, expControlInfo } from "../info";
 import Controls from "../comps/Controls";
-import ExpImageWrapper from "../comps/ExpImageWrapper";
+import ExpImageWrapper from "../comps/Image/Wrappers/ExpImageWrapper";
 export default function Experience({ refNode }) {
   return (
     <>

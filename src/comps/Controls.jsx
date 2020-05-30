@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { Form, Tabs, Tab, Container } from "react-bootstrap";
 import SubmitClearButtons from "./SubmitClearButtons";
-import { ControlContext, StateContext } from "../App";
-import { useHistory } from "react-router-dom";
+import { FunctionContext, StateContext } from "../App";
 import loadable from "@loadable/component";
 import styled from "styled-components";
 import LockToggle from "./ControlAtoms/LockToggle";
+import { useHistory } from "react-router-dom";
 // import CheckToggle from "./ControlAtoms/CheckToggle";
 
 const ControlAtom = loadable((props) =>
@@ -19,7 +19,7 @@ const SpacedContainer = styled(Container).attrs({
 `;
 function Controls({ controlInfo, refNode, lockInfo }) {
   const { clearState, handleGenerate, handleChange, handleSwitch } = useContext(
-    ControlContext
+    FunctionContext
   );
   const state = useContext(StateContext);
   const history = useHistory();
@@ -27,6 +27,11 @@ function Controls({ controlInfo, refNode, lockInfo }) {
   useEffect(() => {
     const pathname = history.location.pathname;
     const campaign = pathname.substring(1);
+    handleChange("campaign")(campaign);
+  }, []);
+
+  useEffect(() => {
+    clearState();
   }, []);
 
   return (
@@ -55,10 +60,6 @@ function Controls({ controlInfo, refNode, lockInfo }) {
         <hr></hr>
         <LockToggle {...lockInfo} handleSwitch={handleSwitch}></LockToggle>
         <hr></hr>
-        <ControlAtom
-          compType={"TextInput"}
-          stateKey={"sizeControl"}
-          handleChange={handleChange}></ControlAtom>
         {SubmitClearButtons(clearState)}
         <hr></hr>
       </Container>
