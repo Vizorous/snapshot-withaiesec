@@ -8,7 +8,7 @@ import { handleChange } from "../../../utils/handlerFunctions";
 
 const WhiteBoxContainer = styled.div`
   position: absolute;
-  /* pointer-events: ${(props) => (props.enableEraser ? `all` : `none`)}; */
+  pointer-events: ${(props) => (props.whiteBoxEraser ? `all` : `none`)};
 `;
 
 export default function MomImageWrapper({ refNode }) {
@@ -31,7 +31,7 @@ export default function MomImageWrapper({ refNode }) {
     canvasHeight: 2000,
     disabled: !state.whiteBoxEraser,
     brushColor: "#444",
-    // hideInterface: !state.whiteBoxEraser,
+    hideInterface: !state.whiteBoxEraser,
   };
 
   useEffect(() => {
@@ -39,7 +39,6 @@ export default function MomImageWrapper({ refNode }) {
       textRef && textRef.current && textRef.current.clientWidth;
     const textIncreaseHeight =
       textRef && textRef.current && textRef.current.clientHeight;
-    // debugger;
     console.log(textIncreaseWidth);
 
     handleChange("whiteBox")({
@@ -50,7 +49,6 @@ export default function MomImageWrapper({ refNode }) {
       rounded: 30,
       lineWidth: 5,
     });
-    // console.log(whiteBox);
   }, [
     state.controlledPosition,
     state.text,
@@ -64,7 +62,7 @@ export default function MomImageWrapper({ refNode }) {
 
   return (
     <GeneratedImageWrapper refNode={refNode}>
-      <WhiteBoxContainer enableEraser={state.whiteBoxEraser}>
+      <WhiteBoxContainer whiteBoxEraser={state.whiteBoxEraser}>
         <CanvasDraw
           immediateLoading={true}
           hideInterface={!state.whiteBoxEraser}
