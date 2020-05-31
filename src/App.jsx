@@ -20,7 +20,7 @@ import Home from "./pages/Home";
 import Moment from "./pages/Moment";
 
 export const StateContext = React.createContext(null);
-export const ControlContext = React.createContext(null);
+export const FunctionContext = React.createContext(null);
 
 export default class App extends Component {
   constructor(props) {
@@ -36,7 +36,6 @@ export default class App extends Component {
     this.handleGenerate = handleGenerate.bind(this);
     this.handleSwitch = handleSwitch.bind(this);
     this.handleDrag = handleDrag.bind(this);
-    this.setControlledPos = setControlledPos.bind(this);
     // *state
     this.state = initialState;
   }
@@ -48,7 +47,20 @@ export default class App extends Component {
         tagImage: tagImages[this.state.product],
       });
     }
-    if (this.state.lock !== prevState.lock) {
+    if (this.state.whiteBoxControlMode !== prevState.whiteBoxControlMode) {
+      if (this.state.whiteBoxControlMode === "eraser") {
+        this.setState({ whiteBoxEraser: true });
+        this.setState({ whiteBoxZoom: false });
+      } else if (this.state.whiteBoxControlMode === "zoom") {
+        this.setState({ whiteBoxEraser: false });
+        this.setState({ whiteBoxZoom: true });
+      } else {
+        this.setState({ whiteBoxEraser: false });
+        this.setState({ whiteBoxZoom: false });
+      }
+      if (this.state.render === true) {
+        this.setState({ whiteBoxControlMode: "none" });
+      }
     }
   }
 
@@ -58,13 +70,14 @@ export default class App extends Component {
     return (
       <div className="App">
         <StateContext.Provider value={this.state}>
-          <ControlContext.Provider
+          <FunctionContext.Provider
             value={{
               clearState: this.clearState,
               handleSwitch: this.handleSwitch,
               handleChange: this.handleChange,
               handleGenerate: this.handleGenerate,
               handleDrag: this.handleDrag,
+              setState: this.setState,
             }}>
             <Switch>
               {/* <Route exact path="/" component={HomeComponent}></Route> */}
@@ -85,7 +98,7 @@ export default class App extends Component {
                   <Moment refNode={this.momentNode}></Moment>
                 )}></Route>
             </Switch>
-          </ControlContext.Provider>
+          </FunctionContext.Provider>
         </StateContext.Provider>
       </div>
     );

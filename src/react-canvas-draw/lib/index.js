@@ -301,8 +301,8 @@ var _default =
 
       _this.handleTouchStart = function (e) {
         var _this$getPointerPos = _this.getPointerPos(e),
-          x = _this$getPointerPos.x,
-          y = _this$getPointerPos.y;
+          x = _this$getPointerPos.x / _this.props.sizeControl,
+          y = _this$getPointerPos.y / _this.props.sizeControl;
 
         _this.lazy.update({ x: x, y: y }, { both: true });
         _this.handleMouseDown(e);
@@ -334,8 +334,9 @@ var _default =
 
       _this.handleMouseMove = function (e) {
         var _this$getPointerPos3 = _this.getPointerPos(e),
-          x = _this$getPointerPos3.x,
-          y = _this$getPointerPos3.y;
+          x = _this$getPointerPos3.x / _this.props.sizeControl,
+          y = _this$getPointerPos3.y / _this.props.sizeControl;
+        console.log(x, y, _this.props.sizeControl);
 
         _this.handlePointerMove(x, y);
       };
@@ -611,9 +612,8 @@ var _default =
       };
 
       _this.drawInterface = function (ctx, pointer, brush) {
-        if (_this.props.hideInterface) return;
-
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        if (_this.props.hideInterface) return;
 
         // Draw brush preview
         ctx.beginPath();
@@ -823,9 +823,12 @@ var _default =
     bottom: _propTypes2.default.number,
     right: _propTypes2.default.number,
     rounded: _propTypes2.default.number,
+    sizeControl: _propTypes2.default.number,
+
     lineWidth: _propTypes2.default.number,
   }),
   (_class.defaultProps = {
+    sizeControl: 0,
     onChange: null,
     loadTimeOffset: 0,
     lazyRadius: 12,

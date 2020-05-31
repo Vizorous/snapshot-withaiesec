@@ -1,7 +1,7 @@
 import React from "react";
 import { momLockInfo, momControlInfo } from "../info";
 import Controls from "../comps/Controls";
-import MomImageWrapper from "../comps/MomImageWrapper";
+import MomImageWrapper from "../comps/Image/Wrappers/MomImageWrapper";
 export default function Moment({ refNode }) {
   return (
     <>

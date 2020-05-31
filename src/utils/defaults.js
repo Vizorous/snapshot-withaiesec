@@ -19,6 +19,8 @@ export const ImgInfo = {
   sizeControl:
     window.innerWidth < 800
       ? (window.innerWidth / 2000) * 0.9
+      : (window.innerWidth / 2000) * 0.5 < window.innerHeight / 2000
+      ? (window.innerHeight / 2000) * 0.8
       : (window.innerWidth / 2000) * 0.5,
 };
 
@@ -26,14 +28,9 @@ export const ImgInfo = {
 
 export const initialState = {
   clearState: false,
-  addedTop: 0,
-  addedLeft: 0,
-  addedWidth: 0,
-  addedHeight: 0,
-  whiteBoxControlMode: "none",
   textLock: false,
   imageLock: false,
-  expText: "sdfsff",
+  text: "Text Here",
   sizeControl: ImgInfo.sizeControl,
   height: ImgInfo.height,
   width: ImgInfo.width,
@@ -43,10 +40,26 @@ export const initialState = {
   textAlign: "left",
   product: "GV",
   tagImage: tagImages.GV,
+  addedTop: 0,
+  addedLeft: 0,
+  addedRight: 0,
+  addedBottom: 0,
+  whiteBoxControlMode: "none",
+  render: false,
+  whiteBoxZoom: false,
+  whiteBoxEraser: false,
   controlledPosition: {
-    x: ImgInfo.sizeControl * 500,
-    y: ImgInfo.sizeControl * 500,
+    x: 500,
+    y: 500,
   },
   fontSize: 70,
   lineHeight: 1.2,
+  whiteBox: {
+    top: 500,
+    left: 500,
+    bottom: 300,
+    right: 300,
+    rounded: 30,
+    lineWidth: 5,
+  },
 };

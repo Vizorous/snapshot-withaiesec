@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Container, Row, Button, Col } from "react-bootstrap";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { ControlContext } from "../App";
+import { FunctionContext } from "../App";
 
 const BigButton = styled(Button).attrs((props) => ({
   size: "lg",
@@ -12,7 +12,7 @@ const BigButton = styled(Button).attrs((props) => ({
   font-size: 2rem;
 `;
 export default function Home() {
-  const { handleChange } = useContext(ControlContext);
+  const { handleChange } = useContext(FunctionContext);
   let history = useHistory();
   const pushHistory = (url) => () => {
     // console.log(history);

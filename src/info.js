@@ -52,7 +52,7 @@ export const expControlInfo = [
         compType: "TextInput",
         label: "Enter the Text",
         placeholder: "Enter the text here",
-        stateKey: "expText",
+        stateKey: "text",
         as: "textarea",
         desc: {
           text:
@@ -152,7 +152,7 @@ export const momControlInfo = [
         compType: "TextInput",
         label: "Enter the Text",
         placeholder: "Enter the text here",
-        stateKey: "expText",
+        stateKey: "text",
         as: "textarea",
         desc: {
           text:
@@ -257,14 +257,14 @@ export const momControlInfo = [
       {
         compType: "RangeInput",
         label: "Adjust Right Margin",
-        stateKey: "addedWidth",
+        stateKey: "addedRight",
         min: 0,
         max: 2000,
       },
       {
         compType: "RangeInput",
         label: "Adjust Bottom Margin",
-        stateKey: "addedHeight",
+        stateKey: "addedBottom",
         min: 0,
         max: 2000,
       },
