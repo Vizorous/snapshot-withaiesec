@@ -56,7 +56,12 @@ export const expControlInfo = [
         as: "textarea",
         desc: {
           text:
+<<<<<<< HEAD
             "Use asterisk(*) syntax to create Colored Text. ex. Normal Text *Colored Text* Normal Text",
+=======
+            "Use ^Text^ syntax to create Colored Text. Use *Text* syntax to create bigger text.",
+          key: v4(),
+>>>>>>> bigger text and colored text desc
         },
       },
       {
