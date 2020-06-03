@@ -7,6 +7,7 @@ function TextInput(props) {
     <Form.Group controlId={props.stateKey}>
       <Form.Label>{props.label}</Form.Label>
       <Form.Control
+        disabled={props.disabled || undefined}
         type={props.type || undefined}
         placeholder={props.placeholder || undefined}
         as={props.as || undefined}

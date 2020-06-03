@@ -56,3 +56,11 @@ export default function ExperienceText({
     </Text>
   );
 }
+// <div
+//   id="text-container"
+//   style={{ fontSize: fontSize, zIndex: 15, pointerEvents: "all" }}
+//   role="textbox"
+//   contentEditable="true"
+//   dangerouslySetInnerHTML={TextStyler(text, fontSize, accentColor, textRef)}
+//   onInput={(e) => handleChange("text")(e.currentTarget.innerHTML)}></div>
+// <input onChange={(e) => handleChange("text")(e)} value={text}></input>

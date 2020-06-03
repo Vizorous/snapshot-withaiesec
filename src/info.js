@@ -49,17 +49,6 @@ export const expControlInfo = [
     name: "Text Settings",
     controlData: [
       {
-        compType: "TextInput",
-        label: "Enter the Text",
-        placeholder: "Enter the text here",
-        stateKey: "text",
-        as: "textarea",
-        desc: {
-          text:
-            "Use ^Text^ syntax to create Colored Text. Use *Text* syntax to create bigger text.",
-        },
-      },
-      {
         compType: "ButtonToggle",
         label: "Adjust the Text Alignment",
         stateKey: "textAlign",
@@ -93,6 +82,32 @@ export const expControlInfo = [
         min: 1,
         max: 2,
         step: "0.1",
+      },
+      {
+        compType: "CheckToggle",
+        toggleData: [
+          {
+            type: "switch",
+            inline: true,
+            stateKey: "editTextOnImageMode",
+            label: "Enable Editing Text on Image",
+          },
+        ],
+      },
+      {
+        compType: "TextInput",
+        label: "Enter the Text",
+        placeholder: "Enter the text here",
+        stateKey: "text",
+        stateBasedProps: {
+          stateHandler: "editTextOnImageMode",
+          prop: "disabled",
+        },
+        as: "textarea",
+        desc: {
+          text:
+            "Use ^Text^ syntax to create Colored Text. Use *Text* syntax to create bigger text.",
+        },
       },
     ],
   },

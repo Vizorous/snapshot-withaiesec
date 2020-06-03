@@ -23,14 +23,10 @@ function Controls({ controlInfo, refNode, lockInfo }) {
   );
   const state = useContext(StateContext);
   const history = useHistory();
-
   useEffect(() => {
     const pathname = history.location.pathname;
     const campaign = pathname.substring(1);
     handleChange("campaign")(campaign);
-  }, []);
-
-  useEffect(() => {
     clearState();
   }, []);
 
@@ -48,6 +44,13 @@ function Controls({ controlInfo, refNode, lockInfo }) {
                   {item.controlData.map((innerItem, innerIndex) => (
                     <ControlAtom
                       {...innerItem}
+                      {...{
+                        [innerItem.stateBasedProps &&
+                        innerItem.stateBasedProps.prop]: state[
+                          innerItem.stateBasedProps &&
+                            innerItem.stateBasedProps.stateHandler
+                        ],
+                      }}
                       value={state[innerItem.stateKey]}
                       key={`${innerItem.stateKey}-elem`}
                       handleChange={handleChange}

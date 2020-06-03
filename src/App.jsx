@@ -77,7 +77,6 @@ export default class App extends Component {
               handleChange: this.handleChange,
               handleGenerate: this.handleGenerate,
               handleDrag: this.handleDrag,
-              setState: this.setState,
             }}>
             <Switch>
               {/* <Route exact path="/" component={HomeComponent}></Route> */}
