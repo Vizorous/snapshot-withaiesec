@@ -29,6 +29,7 @@ function Controls({ controlInfo, refNode, lockInfo }) {
     handleChange("campaign")(campaign);
     clearState();
   }, []);
+  // console.log(controlInfo);
 
   return (
     <Form className="controls" onSubmit={handleGenerate(refNode)}>
@@ -44,13 +45,6 @@ function Controls({ controlInfo, refNode, lockInfo }) {
                   {item.controlData.map((innerItem, innerIndex) => (
                     <ControlAtom
                       {...innerItem}
-                      {...{
-                        [innerItem.stateBasedProps &&
-                        innerItem.stateBasedProps.prop]: state[
-                          innerItem.stateBasedProps &&
-                            innerItem.stateBasedProps.stateHandler
-                        ],
-                      }}
                       value={state[innerItem.stateKey]}
                       key={`${innerItem.stateKey}-elem`}
                       handleChange={handleChange}
