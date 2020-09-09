@@ -20,6 +20,10 @@
   border-color: #eeeeee;
   border-style: dashed;
   padding: 0.5em;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
 }
 .TransformComponent-module_container__3NwNd {
   width: 100% !important;
@@ -27,4 +31,12 @@
 }
 .nav-link:focus {
   outline: none;
+}
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button-container > * {
+  margin: 0 8px;
 }

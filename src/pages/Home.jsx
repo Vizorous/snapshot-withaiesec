@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Container, Row, Button, Col } from "react-bootstrap";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { FunctionContext } from "../App";
+import { FunctionContext } from "../StateContainer";
 
 const BigButton = styled(Button).attrs((props) => ({
   size: "lg",

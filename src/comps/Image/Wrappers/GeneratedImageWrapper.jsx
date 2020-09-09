@@ -2,7 +2,7 @@ import React, { useRef, useState, useContext } from "react";
 import styled from "styled-components";
 import ConstantImage from "../comps/ConstantImage";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { StateContext } from "../../../App";
+import { StateContext } from "../../../StateContainer";
 
 const ImageContainer = styled.div`
   margin: auto;

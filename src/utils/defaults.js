@@ -48,7 +48,7 @@ export const initialState = {
   render: false,
   whiteBoxZoom: false,
   whiteBoxEraser: false,
-  editTextOnImageMode: false,
+  editTextOnImageMode: true,
   controlledPosition: {
     x: 500,
     y: 500,

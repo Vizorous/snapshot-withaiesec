@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Container } from "react-bootstrap";
-import { StateContext } from "../../App";
+import { StateContext } from "../../StateContainer";
 import { useContext } from "react";
 
 function CheckToggle(props) {

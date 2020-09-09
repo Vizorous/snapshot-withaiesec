@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import GeneratedImageWrapper from "./GeneratedImageWrapper";
 import styled from "styled-components";
 import CanvasDraw from "../../../react-canvas-draw/lib/index";
-import { StateContext, FunctionContext } from "../../../App";
+import { StateContext, FunctionContext } from "../../../StateContainer";
 import DraggableText from "../comps/DraggableText";
 import { handleChange } from "../../../utils/handlerFunctions";
 
@@ -39,7 +39,7 @@ export default function MomImageWrapper({ refNode }) {
       textRef && textRef.current && textRef.current.clientWidth;
     const textIncreaseHeight =
       textRef && textRef.current && textRef.current.clientHeight;
-    console.log(textIncreaseWidth);
+    // console.log(textIncreaseWidth);
 
     handleChange("whiteBox")({
       top: state.controlledPosition.y - (state.addedTop + 30),
@@ -58,6 +58,7 @@ export default function MomImageWrapper({ refNode }) {
     state.addedBottom,
     state.addedLeft,
     state.addedRight,
+    handleChange,
   ]);
 
   return (

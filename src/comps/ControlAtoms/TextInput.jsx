@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Form } from "react-bootstrap";
 
 function TextInput(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <Form.Group controlId={props.stateKey}>
       <Form.Label>{props.label}</Form.Label>

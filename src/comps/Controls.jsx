@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { Form, Tabs, Tab, Container } from "react-bootstrap";
+import { Form, Tabs, Tab, Container, Button } from "react-bootstrap";
 import SubmitClearButtons from "./SubmitClearButtons";
-import { FunctionContext, StateContext } from "../App";
+import { FunctionContext, StateContext } from "../StateContainer";
 import loadable from "@loadable/component";
 import styled from "styled-components";
 import LockToggle from "./ControlAtoms/LockToggle";
@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 const ControlAtom = loadable((props) =>
   import(`./ControlAtoms/${props.compType}`)
 );
+
 const SpacedContainer = styled(Container).attrs({
   fluid: true,
 })`
@@ -28,9 +29,9 @@ function Controls({ controlInfo, refNode, lockInfo }) {
     const campaign = pathname.substring(1);
     handleChange("campaign")(campaign);
     clearState();
-  }, []);
+  }, [history, handleChange, clearState]);
   // console.log(controlInfo);
-
+  
   return (
     <Form className="controls" onSubmit={handleGenerate(refNode)}>
       <Container>
@@ -58,6 +59,10 @@ function Controls({ controlInfo, refNode, lockInfo }) {
         <LockToggle {...lockInfo} handleSwitch={handleSwitch}></LockToggle>
         <hr></hr>
         {SubmitClearButtons(clearState)}
+        <hr></hr>
+        <div className="button-container">
+          <Button>Test 1</Button> <Button>Test 2</Button> <Button></Button>
+        </div>
         <hr></hr>
       </Container>
     </Form>

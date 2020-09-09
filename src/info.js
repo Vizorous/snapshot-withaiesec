@@ -1,4 +1,4 @@
-import { StateContext } from "./App";
+import { StateContext } from "./StateContainer";
 import { useContext } from "react";
 
 export const getExpLockInfo = () => ({

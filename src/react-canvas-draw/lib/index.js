@@ -1,4 +1,4 @@
-"use strict";
+// "use strict";
 
 exports.__esModule = true;
 exports.default = undefined;
@@ -336,7 +336,7 @@ var _default =
         var _this$getPointerPos3 = _this.getPointerPos(e),
           x = _this$getPointerPos3.x / _this.props.sizeControl,
           y = _this$getPointerPos3.y / _this.props.sizeControl;
-        console.log(x, y, _this.props.sizeControl);
+        // console.log(x, y, _this.props.sizeControl);
 
         _this.handlePointerMove(x, y);
       };
