@@ -1,27 +1,31 @@
 import { StateContext } from "./StateContainer";
 import { useContext } from "react";
 
-export const getExpLockInfo = () => ({
-  compType: "CheckToggle",
-  label: "Locking Controls",
-  toggleData: [
-    {
-      type: "switch",
-      inline: true,
-      stateKey: "imageLock",
-      label: "Image Lock",
-    },
-    {
-      type: "switch",
-      inline: true,
-      label: "Text Lock",
-      stateKey: "textLock",
-    },
-  ],
-});
+export const getLockInfo = () => {
+  console.log("getlockinfo");
+  return {
+    compType: "CheckToggle",
+    label: "Locking Controls",
+    toggleData: [
+      {
+        type: "switch",
+        inline: true,
+        stateKey: "imageLock",
+        label: "Image Lock",
+      },
+      {
+        type: "switch",
+        inline: true,
+        label: "Text Lock",
+        stateKey: "textLock",
+      },
+    ],
+  };
+};
 //custom hooks pattern to make the keys depended on state
-export const useGetExpControlInfo = () => {
-  const state = useContext(StateContext);
+export const getControlInfo = (stateValues) => {
+  console.log("getcontrolinfo");
+
   return [
     {
       key: "General",
@@ -105,7 +109,7 @@ export const useGetExpControlInfo = () => {
           label: "Enter the Text",
           placeholder: "Enter the text here",
           stateKey: "text",
-          disabled: state.editTextOnImageMode,
+          disabled: stateValues.editTextOnImageMode,
           as: "textarea",
           desc: {
             text:

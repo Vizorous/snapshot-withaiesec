@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useRef } from "react";
 import GeneratedImageWrapper from "./GeneratedImageWrapper";
 import styled from "styled-components";
-import CanvasDraw from "../../../react-canvas-draw/lib/index";
-import { StateContext, FunctionContext } from "../../../StateContainer";
-import DraggableText from "../comps/DraggableText";
-import { handleChange } from "../../../utils/handlerFunctions";
+import CanvasDraw from "../../react-canvas-draw/lib/index";
+import { StateContext, FunctionContext } from "../../StateContainer";
+import DraggableText from "../Image/comps/DraggableText";
+import { handleChange } from "../../utils/handlerFunctions";
 
 const WhiteBoxContainer = styled.div`
   position: absolute;
