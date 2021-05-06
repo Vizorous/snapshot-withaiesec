@@ -23,7 +23,7 @@
     "react-string-replace": "^0.4.4",
     "react-zoom-pan-pinch": "^1.6.1",
     "resize-observer-polyfill": "^1.5.1",
-    "sanitize-html": "^1.26.0",
+    "sanitize-html": "^2.3.2",
     "save-svg-as-png": "^1.4.17",
     "styled-components": "^5.1.0",
     "uuid": "^7.0.3"
